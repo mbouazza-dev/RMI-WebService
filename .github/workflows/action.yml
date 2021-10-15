@@ -9,5 +9,5 @@ jobs:
     - name: Run Discord Webhook
       uses: mbouazza-dev/RMI-WebService/.github/workflows@main
       with:
-        id: ${{ secrets.DISCORD_WEBHOOK_ID }}
-        token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+        id: 898549731603648513
+        token: ZfYGiBkS14om-ghR0LTzDGq3U653sWjZDRbh_d7ZuOtP40stHO89vKSrhulqiz8hFE2E
