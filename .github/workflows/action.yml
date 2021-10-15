@@ -7,7 +7,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v1
     - name: Run Discord Webhook
-      uses: mbouazza-dev/RMI-WebService@main
+      uses: mbouazza-dev/RMI-WebService/.github/workflows@main
       with:
         id: ${{ secrets.DISCORD_WEBHOOK_ID }}
         token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
