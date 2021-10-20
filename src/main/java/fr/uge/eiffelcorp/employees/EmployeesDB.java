@@ -6,23 +6,39 @@ import java.util.List;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class EmployeesDB implements IDBServices{
 	private final HashMap<Integer, Employee> employees = new HashMap<>();
 	
 	
-	/**
-	 * add an employee to the EmployeeDB
-	 * @param employee represents the employee to add
-	 * @throws IllegalArgumentException
-	 */
-	public void add(Employee e) {
-		if(e == null)
-			throw new IllegalArgumentException();
-		else {
-			employees.putIfAbsent(e.getId(), e);
-		}
+	public void insert(String dbName, Employee emp) {
+		Connection c = null;
+	      Statement stmt = null;
+	      
+	      try {
+	         Class.forName("org.sqlite.JDBC");
+	         c = DriverManager.getConnection("jdbc:sqlite:db/"+dbName);
+	         c.setAutoCommit(false);
+	         System.out.println("Opened database successfully");
+
+	         stmt = c.createStatement();
+	         String sql = "INSERT INTO EMPLOYEE (ID,NAME,FIRSTNAME) " +
+	                        "VALUES ("+emp.getId()+",'"+emp.getName()+"','"+emp.getFirstName()+"');"; 
+	         System.out.println("Command: "+sql);
+	         
+	         stmt.executeUpdate(sql);
+
+	         stmt.close();
+	         c.commit();
+	         c.close();
+	      } catch ( Exception e ) {
+	         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+	         System.exit(0);
+	      }
+	      System.out.println("Records created successfully");
 	}
 	
 	/**
@@ -33,17 +49,62 @@ public class EmployeesDB implements IDBServices{
 		return employees.get(id);
 	}
 	
-	/**
-	 * get all employees inside the EmployeeDB
-	 */
-	public List<Employee> getEmployees(){
-		return new ArrayList<Employee>(employees.values());
+	
+	public void getEmployees(String dbName){
+		Connection c = null;
+		   Statement stmt = null;
+		   try {
+		      Class.forName("org.sqlite.JDBC");
+		      c = DriverManager.getConnection("jdbc:sqlite:db/"+dbName);
+		      c.setAutoCommit(false);
+		      System.out.println("Opened database successfully");
+
+		      stmt = c.createStatement();
+		      ResultSet rs = stmt.executeQuery( "SELECT * FROM EMPLOYEE;" );
+		      
+		      while ( rs.next() ) {
+		         int id = rs.getInt("ID");
+		         String  name = rs.getString("NAME");
+		         String  firstname = rs.getString("FIRSTNAME");
+		         
+		         System.out.println( "ID = " + id );
+		         System.out.println( "NAME = " + name );
+		         System.out.println( "FIRST NAME = " + firstname );
+		         System.out.println();
+		      }
+		      rs.close();
+		      stmt.close();
+		      c.close();
+		   } catch ( Exception e ) {
+		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+		      System.exit(0);
+		   }
+		   System.out.println("Operation done successfully");
 	}
 
 	@Override
-	public void createTables() {
-		// TODO Auto-generated method stub
-		
+	public void createTables(String dbName) {
+		Connection c = null;
+	    Statement stmt = null;
+	      
+	    try {
+	       Class.forName("org.sqlite.JDBC");
+	       c = DriverManager.getConnection("jdbc:sqlite:db/"+dbName);
+	       System.out.println("Opened database successfully");
+
+	       stmt = c.createStatement();
+	       String sql = "CREATE TABLE EMPLOYEE " +
+	                      "(ID INTEGER PRIMARY KEY     NOT NULL," +
+	                      " NAME           TEXT    NOT NULL, " + 
+	                      " FIRSTNAME           TEXT    NOT NULL)"; 
+	       stmt.executeUpdate(sql);
+	       stmt.close();
+	       c.close();
+	    } catch ( Exception e ) {
+	       System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+	       System.exit(0);
+	    }
+	    System.out.println("Table created successfully");
 	}
 
 	@Override
