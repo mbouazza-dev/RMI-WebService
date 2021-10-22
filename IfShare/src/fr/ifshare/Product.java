@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Product implements Serializable {
+	
 	private static int COUNTER = 1;
 	private int id;
 	private String label;
