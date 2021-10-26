@@ -5,7 +5,7 @@ public class EmployeeApp {
 		EmployeesDB db = new EmployeesDB();
 		db.createNewDatabase("employeedb");
 		db.createTables("employeedb");
-		db.insert("employeedb",new Employee(1, "Elons", "Musk"));
+		db.insert("employeedb",new Employee(1, "Elons", "Musk", 1000000000));
 		db.getEmployees("employeedb");
 	}
 

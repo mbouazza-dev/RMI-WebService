@@ -25,8 +25,8 @@ public class EmployeesDB implements IDBServices{
 	         System.out.println("Opened database successfully");
 
 	         stmt = c.createStatement();
-	         String sql = "INSERT INTO EMPLOYEE (ID,NAME,FIRSTNAME) " +
-	                        "VALUES ("+emp.getId()+",'"+emp.getName()+"','"+emp.getFirstName()+"');"; 
+	         String sql = "INSERT INTO EMPLOYEE (ID,NAME,FIRSTNAME,BALANCE) " +
+	                        "VALUES ("+emp.getId()+",'"+emp.getName()+"','"+emp.getFirstName()+"','"+emp.getBalance()+"');"; 
 	         System.out.println("Command: "+sql);
 	         
 	         stmt.executeUpdate(sql);
@@ -66,10 +66,12 @@ public class EmployeesDB implements IDBServices{
 		         int id = rs.getInt("ID");
 		         String  name = rs.getString("NAME");
 		         String  firstname = rs.getString("FIRSTNAME");
+		         long	balance = rs.getLong("BALANCE");
 		         
 		         System.out.println( "ID = " + id );
 		         System.out.println( "NAME = " + name );
 		         System.out.println( "FIRST NAME = " + firstname );
+		         System.out.println( "BALANCE = " + String.format("%,d", balance));
 		         System.out.println();
 		      }
 		      rs.close();
@@ -96,7 +98,8 @@ public class EmployeesDB implements IDBServices{
 	       String sql = "CREATE TABLE EMPLOYEE " +
 	                      "(ID INTEGER PRIMARY KEY     NOT NULL," +
 	                      " NAME           TEXT    NOT NULL, " + 
-	                      " FIRSTNAME           TEXT    NOT NULL)"; 
+	                      " FIRSTNAME           TEXT    NOT NULL, " +
+	                      " BALANCE		BIGINT NOT NULL);";
 	       stmt.executeUpdate(sql);
 	       stmt.close();
 	       c.close();
@@ -148,7 +151,7 @@ public class EmployeesDB implements IDBServices{
 		   System.out.println("Opened database successfully");
 
 		   stmt = c.createStatement();
-		   String sql = "UPDATE EMPLOYEE set NAME = "+emp.getName()+", FIRSTNAME = "+emp.getFirstName()+" where ID="+id+";";
+		   String sql = "UPDATE EMPLOYEE set NAME = "+emp.getName()+", FIRSTNAME = "+emp.getFirstName()+", BALANCE = "+emp.getBalance()+" where ID="+id+";";
 		   stmt.executeUpdate(sql);
 		   c.commit();
 
