@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import fr.ifshare.IStore;
 import fr.ifshare.Product;
+import fr.ifshare.Rating;
 
 public class Store extends UnicastRemoteObject implements IStore {
 	private final HashMap<Integer, Product> products;
@@ -43,9 +44,9 @@ public class Store extends UnicastRemoteObject implements IStore {
 	}
 
 	@Override
-	public void rateProduct(int idProduct, float rate) throws RemoteException {
+	public void rateProduct(int idProduct, double rate, String comment) throws RemoteException {
 		products.computeIfPresent(idProduct, (x, y) -> {
-			y.addRate(rate);
+			y.addRate(new Rating(rate, comment));
 			// logging de l'event
 			return y;
 		});
