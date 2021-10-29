@@ -17,7 +17,8 @@ public class Main {
 			new Command("list", "list", "Lister tous les produits disponibles.", (store, params) -> { System.out.println(store.getProducts()); }),
 			new Command("get", "get \\d+", "Obtenir les informations d'un produit en particulier.", (store, params) -> { System.out.println(store.getProduct(Integer.parseInt(params[1]))); }),
 			new Command("add", "add \\w+ \\d+", "Ajouter un produit au catalogue.", (store, params) -> { store.addProduct(params[1], Integer.parseInt(params[2])); }),
-			new Command("rate", "rate \\d+ \\d(\\.\\d)?", "Noter un produit", (store, params) -> { store.rateProduct(Integer.parseInt(params[1]), Float.parseFloat(params[2])); })
+			// le pattern est à vérifier
+			new Command("rate", "rate \\d+ \\d(\\.\\d)? [\\w\\s',]+", "Noter un produit", (store, params) -> { store.rateProduct(Integer.parseInt(params[1]), Double.parseDouble(params[2]), params[3]); })
 		);
 	
 	/**
