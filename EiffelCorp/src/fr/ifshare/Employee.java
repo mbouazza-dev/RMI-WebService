@@ -1,4 +1,4 @@
-package fr.uge.employee;
+package fr.ifshare;
 
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
