@@ -50,5 +50,5 @@ public class IfShareAnnounce implements Announce {
 	public boolean available() {
 		return productsMap.isEmpty();
 	}
-	
+
 }

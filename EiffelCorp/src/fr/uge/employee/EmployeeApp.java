@@ -1,5 +1,7 @@
 package fr.uge.employee;
 
+import fr.ifshare.Employee;
+
 public class EmployeeApp {
 	public static void main(String[] args) {
 		EmployeesDB db = new EmployeesDB();
