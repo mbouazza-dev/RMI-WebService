@@ -1,0 +1,56 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 	<modelVersion>4.0.0</modelVersion>
+ 	
+ 	<!-- Référence au projet Maven supérieur : web-services-project -->
+	<parent>
+		<groupId>fr.uge</groupId>
+		<artifactId>web-services-project</artifactId>
+		<version>0.1.0</version>
+	</parent>
+	<artifactId>eiffel-corp</artifactId>
+	
+	<name>EiffelCorp</name>
+	<description>Application qui permet au employés d'Eiffel Corp d'accèder à l'application de vente de IfShare.</description>
+
+	<properties>
+		<!-- Indique la classe principale de ce projet lors de la création du jar -->
+		<jar.mainClass>fr.uge.main.Main</jar.mainClass>
+	</properties>
+
+	<dependencies>
+		<!-- Utile pour l'interface graphique -->
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- Utile pour la persistence des données -->
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+		<!-- Base de données utilisée (mémoire) -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<!-- Spécifie le path du répertoire contenant les resources du projet -->
+		<resources>
+			<resource>
+				<directory>${project.basedir}/resources</directory>
+			</resource>
+		</resources>
+		
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

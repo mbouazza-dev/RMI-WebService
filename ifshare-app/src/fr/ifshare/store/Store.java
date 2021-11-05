@@ -30,8 +30,8 @@ public class Store extends UnicastRemoteObject implements IStore {
 	
 	@Override
 	public void addProduct(String label, int idEmployee) throws RemoteException {
-		Product newProduct = new Product(label, idEmployee, idEmployee);
-		products.put(newProduct.getId(), newProduct);
+//		Product newProduct = new Product(label, idEmployee, idEmployee);
+//		products.put(newProduct.getId(), newProduct);
 	}
 
 	@Override
