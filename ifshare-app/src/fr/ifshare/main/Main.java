@@ -12,6 +12,8 @@ public class Main {
 		try {
 			LocateRegistry.createRegistry(1099);
 			IStore store = new Store();
+			store.addProduct("Vélo", 0);
+			store.addProduct("Livre", 1);
 
 			Naming.rebind("storeService", store);
 			System.out.println("Store start");

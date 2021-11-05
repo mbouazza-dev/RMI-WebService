@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import fr.ifshare.IStore;
 import fr.ifshare.Product;
+import fr.ifshare.Product.State;
 import fr.ifshare.Rating;
 
 public class Store extends UnicastRemoteObject implements IStore {
@@ -30,7 +31,7 @@ public class Store extends UnicastRemoteObject implements IStore {
 	
 	@Override
 	public void addProduct(String label, int idEmployee) throws RemoteException {
-		Product newProduct = new Product(label, idEmployee, idEmployee);
+		Product newProduct = new Product(label, idEmployee, 3.f, State.ALMOST_NEW);
 		products.put(newProduct.getId(), newProduct);
 	}
 
