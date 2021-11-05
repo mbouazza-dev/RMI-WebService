@@ -9,7 +9,7 @@ import java.util.Queue;
 
 public class Product implements Serializable {
 	
-	enum State { NEW, ALMOST_NEW , USED, BROKEN }
+	public enum State { NEW, ALMOST_NEW , USED, BROKEN }
 	
 	private static int COUNTER = 1;
 	private final int id;
@@ -32,6 +32,10 @@ public class Product implements Serializable {
 	
 	public int getId() {
 		return id;
+	}
+	
+	public String getLabel() {
+		return label;
 	}
 	
 	@Override

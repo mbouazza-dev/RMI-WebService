@@ -9,8 +9,14 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+
 import fr.ifshare.IStore;
 
+@SpringBootApplication
+@ComponentScan(basePackages = "fr.uge")
 public class Main {
 	private static List<Command> commands = Arrays.asList(
 			// command, usage, description, action
@@ -29,17 +35,10 @@ public class Main {
 		System.out.println(commands.stream().map(Command::toString).collect(Collectors.joining("\n")));
 	}
 	
-//	private static boolean login() {
-//		System.out.println("Identifiant :\n");
-//		try (Scanner scanner = new Scanner(System.in)) {
-//			if (scanner.hasNextLine()) {
-//				String login = scanner.nextLine();
-//				
-//			}
-//		}
-//	}
+
 
 	public static void main(String[] args) throws RemoteException {
+		SpringApplication.run(Main.class, args);
 		displayHelp();
 		
 		try {
