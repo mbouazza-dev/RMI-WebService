@@ -1,4 +1,4 @@
-package fr.ifshare;
+package fr.sharedclasses;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

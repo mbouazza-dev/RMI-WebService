@@ -1,4 +1,4 @@
-package fr.ifshare;
+package fr.sharedclasses;
 
 import java.io.Serializable;
 

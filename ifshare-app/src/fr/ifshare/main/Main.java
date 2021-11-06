@@ -5,10 +5,10 @@ import java.rmi.RMISecurityManager;
 import java.rmi.registry.LocateRegistry;
 import java.util.List;
 
-import fr.ifshare.IStore;
-import fr.ifshare.Product;
-import fr.ifshare.Product.State;
 import fr.ifshare.store.Store;
+import fr.sharedclasses.IStore;
+import fr.sharedclasses.Product;
+import fr.sharedclasses.Product.State;
 
 public class Main {
 	

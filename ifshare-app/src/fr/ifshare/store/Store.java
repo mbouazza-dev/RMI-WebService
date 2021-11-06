@@ -6,11 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import fr.ifshare.Announce;
-import fr.ifshare.IStore;
-import fr.ifshare.Product;
-import fr.ifshare.Product.State;
-import fr.ifshare.Rating;
+import fr.sharedclasses.Announce;
+import fr.sharedclasses.IStore;
+import fr.sharedclasses.Product;
+import fr.sharedclasses.Rating;
+import fr.sharedclasses.Product.State;
 
 public class Store extends UnicastRemoteObject implements IStore {
 	private final HashMap<Integer, Announce> announces; // <idAnnounce, Announce>
