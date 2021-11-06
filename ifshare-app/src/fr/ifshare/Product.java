@@ -38,6 +38,18 @@ public class Product implements Serializable {
 		return label;
 	}
 	
+	public int getIdEmployee() {
+		return idEmployee;
+	}
+	
+	public float getPrice() {
+		return price;
+	}
+	
+	public State getState() {
+		return state;
+	}
+	
 	@Override
 	public String toString() {
 		return "(" +id+ ") " +label+ " : " +getRate()+ " star(s), comment(s) : " +rates.toString();
@@ -60,4 +72,6 @@ public class Product implements Serializable {
 	public double getRate() {
 		return rates.stream().mapToDouble(e -> e.getRate()).average().orElse(0);
 	}
+	
+	
 }
