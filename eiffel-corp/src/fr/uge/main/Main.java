@@ -1,6 +1,7 @@
 package fr.uge.main;
 
 import java.rmi.Naming;
+import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 import java.util.Arrays;
 import java.util.List;
@@ -35,11 +36,23 @@ public class Main {
 		//System.out.println(commands.stream().map(Command::toString).collect(Collectors.joining("\n")));
 	}
 	
-
+	@SuppressWarnings("deprecation")
+	private static void setSecurityPolicy(String securityFilePath) {
+		System.setProperty("java.security.policy", securityFilePath);
+	    if (System.getSecurityManager() == null) {
+	        System.setSecurityManager(new RMISecurityManager());
+	    }
+	}
+	
 
 	public static void main(String[] args) throws RemoteException {
 		SpringApplication.run(Main.class, args);
-		displayHelp();
+		try {
+			setSecurityPolicy("resources/rmi_policy/security.policy");
+			displayHelp();
+		} catch (Exception e) {
+			System.err.println("Erreur");
+		  }	
 		
 //		try {
 //			IStore store = (IStore) Naming.lookup("storeService");
@@ -61,7 +74,7 @@ public class Main {
 //				}
 //			}
 //		} catch (Exception e) {
-//			System.out.println("Erreur");
+//			
 //		}
 	}
 
