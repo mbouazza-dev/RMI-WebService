@@ -6,51 +6,69 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import fr.ifshare.Announce;
 import fr.ifshare.IStore;
 import fr.ifshare.Product;
 import fr.ifshare.Product.State;
 import fr.ifshare.Rating;
 
 public class Store extends UnicastRemoteObject implements IStore {
-	private final HashMap<Integer, Product> products;
+	private final HashMap<Integer, Announce> announces; // <idAnnounce, Announce>
 
 	public Store() throws RemoteException {
 		super();
-		products = new HashMap<>();
+		announces = new HashMap<>();
 	}
 
 	@Override
-	public Product getProduct(int idProduct) throws RemoteException {
-		return products.get(idProduct);
+	public Product getProduct(int idAnnounce, int idProduct) throws RemoteException {
+		return announces.get(idAnnounce).getProduct(idProduct);
 	}
 
 	@Override
-	public List<Product> getProducts() throws RemoteException {
-		return products.values().stream().collect(Collectors.toList());
-	}
-	
-	@Override
-	public void addProduct(String label, int idEmployee) throws RemoteException {
-		Product newProduct = new Product(label, idEmployee, 3.f, State.ALMOST_NEW);
-		products.put(newProduct.getId(), newProduct);
+	public List<Product> getProducts(int idAnnounce) throws RemoteException {
+		return announces.get(idAnnounce).getProducts();
 	}
 
 	@Override
-	public void buyProduct(int idProduct, int idEmployee) throws RemoteException {
-		if (products.containsKey(idProduct)) {
-			products.remove(idProduct);
-			// logging de l'event
-			// appel service banque
+	public void buyProduct(int idAnnounce, int idProduct, int idEmployee) throws RemoteException {
+		if (announces.containsKey(idAnnounce)) {
+			Announce announce = announces.get(idAnnounce);
+			announce.soldProduct(idProduct);
 		}
 	}
 
 	@Override
-	public void rateProduct(int idProduct, double rate, String comment) throws RemoteException {
-		products.computeIfPresent(idProduct, (x, y) -> {
+	public void rateAnnounce(int idAnnounce, double rate, String comment) throws RemoteException {
+		announces.computeIfPresent(idAnnounce, (x, y) -> {
 			y.addRate(new Rating(rate, comment));
-			// logging de l'event
 			return y;
 		});
+	}
+
+	@Override
+	public void createAnnounce(String label, String description, Product firstProduct, List<String> tags)
+			throws RemoteException {
+		Announce announce = new Announce(label, description, firstProduct, tags);
+		announces.put(announce.getId(), announce);
+	}
+
+	@Override
+	public void addProductToAnnounce(int idAnnounce, Product product) throws RemoteException {
+		if (announces.containsKey(idAnnounce)) {
+			Announce announce = announces.get(idAnnounce);
+			announce.addProduct(product);
+		}
+	}
+
+	@Override
+	public Announce getAnnounce(int idAnnounce) throws RemoteException {
+		return announces.get(idAnnounce);
+	}
+
+	@Override
+	public List<Announce> getAnnounces() throws RemoteException {
+		return announces.values().stream().collect(Collectors.toList());
 	}
 
 }

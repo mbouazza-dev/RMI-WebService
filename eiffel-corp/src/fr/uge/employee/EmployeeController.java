@@ -30,10 +30,10 @@ public class EmployeeController {
 //		return "products";
 //	}
 	
-	@GetMapping("/products")
-	public String listProducts(Model model) throws RemoteException {
-		model.addAttribute("products", store.getProducts());
-		store.getProducts().stream().forEach(p -> System.out.println(p.toString())); // pour debug
-		return "products";
+	@GetMapping("/announces")
+	public String listAnnounces(Model model) throws RemoteException {
+		model.addAttribute("announces", store.getAnnounces());
+		store.getAnnounces().stream().forEach(p -> System.out.println(p.toString())); // pour debug
+		return "announces";
 	}
 }

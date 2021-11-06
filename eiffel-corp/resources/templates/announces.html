@@ -6,9 +6,11 @@
 </head>
 <body>
     <ul>
-    	<li th:each="value: ${products}">
+    	<li th:each="value: ${announces}">
     		<p th:text="${value.id}"></p>
     		<p th:text="${value.label}"></p>
+    		<p th:text="${value.description}"></p>
+    		<p>Premier prix : <span th:text="${value.getMinPrice()}"></span> €</p>
     	</li>
     </ul>
 </body>

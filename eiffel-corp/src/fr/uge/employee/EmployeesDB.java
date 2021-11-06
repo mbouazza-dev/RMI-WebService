@@ -3,9 +3,6 @@ package fr.uge.employee;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import fr.ifshare.Employee;
-
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
