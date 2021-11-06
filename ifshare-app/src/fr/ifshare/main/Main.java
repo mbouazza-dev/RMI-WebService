@@ -17,7 +17,11 @@ public class Main {
 			IStore store = new Store();
 			store.createAnnounce("Samsung S10", "Le smartphone qui vous immerge dans l'image avec son écran Infinity 6,1\" Full HD+.", new Product(1, 250.f, State.ALMOST_NEW), List.of("Samsung S10", "Téléphone", "64Go"));
 			store.createAnnounce("VTT ST 120", "Un VTT performant et facile ! Aux commandes du VTT ST 120, vous vous sentez précis et léger.", new Product(2, 299.f, State.NEW), List.of("Vélo", "VTT", "VTT ST 120", "Sport"));
+			store.createAnnounce("Le Livre de la Jungle", "Un recueil de nouvelles dont chacune raconte une histoire qui se passe dans la jungle...", new Product(2, 12.f, State.USED), List.of("Livre", "Rudyard Kipling", "Littérature"));
 			store.addProductToAnnounce(1, new Product(3, 189.f, State.USED));
+			store.buyProduct(3, 3, 5);
+			store.rateAnnounce(1, 4.f, "Bon téléphone");
+			store.rateAnnounce(1, 3.5f, "Rechargement trop long");
 
 			Naming.rebind("storeService", store);
 			System.out.println("Store start");

@@ -31,15 +31,6 @@ public interface IStore extends Remote {
 	List<Product> getProducts(int idAnnounce) throws RemoteException;
 	
 	/**
-	 * Add a new product to the store.
-	 * 
-	 * @param label the label of the new product
-	 * @param idEmployee the id of the employee who sells the product
-	 * @throws RemoteException
-	 */
-	//void addProduct(String label, int idEmployee) throws RemoteException;
-	
-	/**
 	 * Remove the product of the store.
 	 * 
 	 * @param idProduct the id of the product that has just been purchased

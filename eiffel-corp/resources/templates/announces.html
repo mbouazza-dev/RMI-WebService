@@ -2,16 +2,43 @@
 <html lang="fr" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Products</title>
+    <title>Annonces</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
 </head>
 <body>
-    <ul>
-    	<li th:each="value: ${announces}">
-    		<p th:text="${value.id}"></p>
-    		<p th:text="${value.label}"></p>
-    		<p th:text="${value.description}"></p>
-    		<p>Premier prix : <span th:text="${value.getMinPrice()}"></span> €</p>
-    	</li>
-    </ul>
+
+	<table>
+		<tr>
+			<th>Libellé</th>
+			<th>Description</th>
+			<th>Note</th>
+			<th>A partir de</th>
+			<th></th>
+		</tr>
+		<tr th:each="announce: ${announces}">
+			<td th:text="${announce.label}"></td>
+			<td th:text="${announce.description}"></td>
+			<td><span th:text="${announce.getRate()}" />/5 </td>
+			<td><span th:text="${announce.getMinPrice()}" /> €</td>
+			<td><a th:href="@{/announces/{idAnnounce}(idAnnounce = ${announce.id})}">Voir les offres</a></td>
+		</tr>
+	</table>
+
 </body>
 </html>

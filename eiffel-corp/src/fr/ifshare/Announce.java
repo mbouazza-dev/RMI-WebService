@@ -58,6 +58,14 @@ public class Announce implements Serializable {
 		return products.get(idProduct);
 	}
 	
+	public double getRate() {
+		return rates.stream().mapToDouble(e -> e.getRate()).average().orElse(0);
+	}
+	
+	public List<String> getComments() {
+		return rates.stream().map(r -> r.getComment()).collect(Collectors.toList());
+	}
+	
 	public List<Product> getProducts() {
 		return products.values().stream().collect(Collectors.toList());
 	}
@@ -67,7 +75,7 @@ public class Announce implements Serializable {
 	}
 	
 	public float getMinPrice() {
-		return products.values().stream().map(p -> p.getPrice()).min(Float::compare).get();
+		return products.values().stream().map(p -> p.getPrice()).min(Float::compare).orElse(-1.f);
 	}
 	
 	@Override

@@ -1,8 +1,9 @@
 package fr.ifshare;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Rating {
+public class Rating implements Serializable {
 	private final double rate;
 	private final String comment;
 	
@@ -16,6 +17,10 @@ public class Rating {
 	
 	public double getRate() {
 		return rate;
+	}
+	
+	public String getComment() {
+		return comment;
 	}
 	
 	@Override

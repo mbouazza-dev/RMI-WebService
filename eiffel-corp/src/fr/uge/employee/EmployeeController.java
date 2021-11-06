@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import fr.ifshare.IStore;
 
@@ -35,5 +36,11 @@ public class EmployeeController {
 		model.addAttribute("announces", store.getAnnounces());
 		store.getAnnounces().stream().forEach(p -> System.out.println(p.toString())); // pour debug
 		return "announces";
+	}
+	
+	@GetMapping("/announces/{idAnnounce}")
+	public String listProductsOfAnnounce(@PathVariable int idAnnounce, Model model) throws RemoteException {
+		model.addAttribute("announce", store.getAnnounce(idAnnounce));
+		return "announce";
 	}
 }
