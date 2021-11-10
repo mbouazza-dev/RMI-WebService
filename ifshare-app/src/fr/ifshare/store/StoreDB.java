@@ -7,8 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import fr.ifshare.Employee;
-import fr.ifshare.Product;
+import fr.sharedclasses.Product;
 
 public class StoreDB {
 
@@ -18,7 +17,7 @@ public class StoreDB {
 	      
 	      try {
 	         Class.forName("org.h2.Driver");
-	         c = DriverManager.getConnection("jdbc:h2:~/db/"+dbName);
+	         c = DriverManager.getConnection("jdbc:h2:./db/"+dbName);
 	         c.setAutoCommit(false);
 	         System.out.println("Opened database successfully");
 
@@ -45,7 +44,7 @@ public class StoreDB {
 		   Statement stmt = null;
 		   try {
 		      Class.forName("org.h2.Driver");
-		      c = DriverManager.getConnection("jdbc:h2:~/db/"+dbName);
+		      c = DriverManager.getConnection("jdbc:h2:./db/"+dbName);
 		      c.setAutoCommit(false);
 		      System.out.println("Opened database successfully");
 
@@ -85,7 +84,7 @@ public class StoreDB {
 	      
 	    try {
 	       Class.forName("org.h2.Driver");
-	       c = DriverManager.getConnection("jdbc:h2:~/db/"+dbName);
+	       c = DriverManager.getConnection("jdbc:h2:./db/"+dbName);
 	       System.out.println("Opened database successfully");
 
 	       stmt = c.createStatement();
@@ -112,7 +111,7 @@ public class StoreDB {
 	      
 	      try {
 	         Class.forName("org.h2.Driver");
-	         c = DriverManager.getConnection("jdbc:h2:~/db/"+dbName);
+	         c = DriverManager.getConnection("jdbc:h2:./db/"+dbName);
 	      } catch ( Exception e ) {
 	         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 	         System.exit(0);
@@ -122,7 +121,7 @@ public class StoreDB {
 
 	
 	public void createNewDatabase(String dbName) {
-		String url = "jdbc:h2:~/db/" + dbName;
+		String url = "jdbc:h2:./db/" + dbName;
 		try {
 			Class.forName("org.h2.Driver");
 			Connection conn = DriverManager.getConnection(url);
@@ -143,7 +142,7 @@ public class StoreDB {
 		   
 		try {
 		   Class.forName("org.h2.Driver");
-		   c = DriverManager.getConnection("jdbc:h2:~/db/"+dbName);
+		   c = DriverManager.getConnection("jdbc:h2:./db/"+dbName);
 		   c.setAutoCommit(false);
 		   System.out.println("Opened database successfully");
 
@@ -167,7 +166,7 @@ public class StoreDB {
 	      
 	    try {
 	       Class.forName("org.h2.Driver");
-	       c = DriverManager.getConnection("jdbc:h2:~/db/"+dbName);
+	       c = DriverManager.getConnection("jdbc:h2:./db/"+dbName);
 	       c.setAutoCommit(false);
 	       System.out.println("Opened database successfully");
 

@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import fr.ifshare.IStore;
+import fr.sharedclasses.IStore;
 
 @Configuration
 public class AppConfiguration {

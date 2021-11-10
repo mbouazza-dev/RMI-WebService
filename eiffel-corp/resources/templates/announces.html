@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Annonces</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+
+	<table>
+		<tr>
+			<th>Libellé</th>
+			<th>Description</th>
+			<th>Note</th>
+			<th>A partir de</th>
+			<th></th>
+		</tr>
+		<tr th:each="announce: ${announces}">
+			<td th:text="${announce.label}"></td>
+			<td th:text="${announce.description}"></td>
+			<td><span th:text="${announce.getRate()}" />/5 </td>
+			<td><span th:text="${announce.getMinPrice()}" /> €</td>
+			<td><a th:href="@{/announces/{idAnnounce}(idAnnounce = ${announce.id})}">Voir les offres</a></td>
+		</tr>
+	</table>
+
+</body>
+</html>

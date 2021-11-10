@@ -2,7 +2,7 @@ package fr.uge.main;
 
 import java.util.Objects;
 
-import fr.ifshare.IStore;
+import fr.sharedclasses.IStore;
 
 public class Command {
 	private final String command;

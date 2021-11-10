@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Queue;
 
+import fr.sharedclasses.Rating;
+
 public class Product implements Serializable {
 	
 	public enum State { NEW, ALMOST_NEW , USED, BROKEN }

@@ -1,4 +1,4 @@
-package fr.ifshare;
+package fr.sharedclasses;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,8 +20,6 @@ public class Product implements Serializable {
 	private final State state;
 	
 	
-	
-	
 	public Product(String label, int idEmployee, float price, State state) {
 		this.id = COUNTER++;
 		this.label = Objects.requireNonNull(label);
@@ -36,6 +34,18 @@ public class Product implements Serializable {
 	
 	public String getLabel() {
 		return label;
+	}
+	
+	public int getIdEmployee() {
+		return idEmployee;
+	}
+	
+	public float getPrice() {
+		return price;
+	}
+	
+	public State getState() {
+		return state;
 	}
 	
 	@Override
@@ -60,4 +70,6 @@ public class Product implements Serializable {
 	public double getRate() {
 		return rates.stream().mapToDouble(e -> e.getRate()).average().orElse(0);
 	}
+	
+	
 }
