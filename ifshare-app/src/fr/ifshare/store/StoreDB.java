@@ -7,11 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import fr.sharedclasses.Announce;
 import fr.sharedclasses.Product;
 
 public class StoreDB {
 
-	public void insert(String dbName, Product pct) {
+	public void insertProduct(String dbName, Product pct) {
 		Connection c = null;
 	      Statement stmt = null;
 	      
@@ -24,6 +25,60 @@ public class StoreDB {
 	         stmt = c.createStatement();
 	         String sql = "INSERT INTO PRODUCT (ID,LABEL,IDEMPLOYEE,RATE,PRICE,STATE) " +
 	                        "VALUES ("+pct.getId()+",'"+pct.getLabel()+"','"+pct.getIdEmployee()+"','"+pct.getRate()+"','"+pct.getPrice()+"','"+String.valueOf(pct.getState())+"');"; 
+	         System.out.println("Command: "+sql);
+	         
+	         stmt.executeUpdate(sql);
+
+	         stmt.close();
+	         c.commit();
+	         c.close();
+	      } catch ( Exception e ) {
+	         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+	         System.exit(0);
+	      }
+	      System.out.println("Records created successfully");
+	}
+	
+	public void insertAnnounce(String dbName, Announce anc) {
+		Connection c = null;
+	      Statement stmt = null;
+	      
+	      try {
+	         Class.forName("org.h2.Driver");
+	         c = DriverManager.getConnection("jdbc:h2:./db/"+dbName);
+	         c.setAutoCommit(false);
+	         System.out.println("Opened database successfully");
+
+	         stmt = c.createStatement();
+	         String sql = "INSERT INTO ANNOUNCE (ID,LABEL,DESCRIPTION,RATES,TAGS,CATEGORY) " +
+	                        "VALUES ("+anc.getId()+",'"+anc.getLabel()+"','"+anc.getDescription()+"','"+anc.getRate()+"','"+anc.getTags()+"','"+anc.getCategory()+"');"; 
+	         System.out.println("Command: "+sql);
+	         
+	         stmt.executeUpdate(sql);
+
+	         stmt.close();
+	         c.commit();
+	         c.close();
+	      } catch ( Exception e ) {
+	         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+	         System.exit(0);
+	      }
+	      System.out.println("Records created successfully");
+	}
+	
+	public void insertOnSale(String dbName, Announce anc, Product pct) {
+		Connection c = null;
+	      Statement stmt = null;
+	      
+	      try {
+	         Class.forName("org.h2.Driver");
+	         c = DriverManager.getConnection("jdbc:h2:./db/"+dbName);
+	         c.setAutoCommit(false);
+	         System.out.println("Opened database successfully");
+
+	         stmt = c.createStatement();
+	         String sql = "INSERT INTO ON_SALE (ID,IDPRODUCT) " +
+	                        "VALUES ("+anc.getId()+",'"+pct.getId()+"');"; 
 	         System.out.println("Command: "+sql);
 	         
 	         stmt.executeUpdate(sql);
@@ -78,7 +133,7 @@ public class StoreDB {
 	}
 
 	
-	public void createTable(String dbName) {
+	public void createTableProduct(String dbName) {
 		Connection c = null;
 	    Statement stmt = null;
 	      
@@ -88,13 +143,63 @@ public class StoreDB {
 	       System.out.println("Opened database successfully");
 
 	       stmt = c.createStatement();
-	       String sql = "CREATE TABLE PRODUCT " +
+	       String sql = "CREATE TABLE IF NOT EXISTS PRODUCT " +
 	                      "(ID INTEGER PRIMARY KEY     NOT NULL," +
 	                      " LABEL           TEXT    NOT NULL, " + 
 	                      " IDEMPLOYEE           INTEGER, " +
 	                      " RATE	FLOAT4," +
 	                      " PRICE	FLOAT4," +
 	                      " STATE	TEXT"+ ");";
+	       stmt.executeUpdate(sql);
+	       stmt.close();
+	       c.close();
+	    } catch ( Exception e ) {
+	       System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+	       System.exit(0);
+	    }
+	    System.out.println("Table created successfully");
+	}
+	
+	public void createTableAnnounce(String dbName) {
+		Connection c = null;
+	    Statement stmt = null;
+	      
+	    try {
+	       Class.forName("org.h2.Driver");
+	       c = DriverManager.getConnection("jdbc:h2:./db/"+dbName);
+	       System.out.println("Opened database successfully");
+
+	       stmt = c.createStatement();
+	       String sql = "CREATE TABLE IF NOT EXISTS ANNOUNCE " +
+	                      "(ID INTEGER PRIMARY KEY     NOT NULL," +
+	                      " LABEL           TEXT    NOT NULL, " + 
+	                      " DESCRIPTION           TEXT, " +
+	                      " RATES	FLOAT4," +
+	                      " TAGS	TEXT," +
+	                      " CATEGORY	TEXT"+ ");";
+	       stmt.executeUpdate(sql);
+	       stmt.close();
+	       c.close();
+	    } catch ( Exception e ) {
+	       System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+	       System.exit(0);
+	    }
+	    System.out.println("Table created successfully");
+	}
+	
+	public void createTableOnSale(String dbName) {
+		Connection c = null;
+	    Statement stmt = null;
+	      
+	    try {
+	       Class.forName("org.h2.Driver");
+	       c = DriverManager.getConnection("jdbc:h2:./db/"+dbName);
+	       System.out.println("Opened database successfully");
+
+	       stmt = c.createStatement();
+	       String sql = "CREATE TABLE IF NOT EXISTS ON_SALE " +
+	                      "(ID INTEGER PRIMARY KEY     NOT NULL," +
+	                      " IDPRODUCT           INTEGER    NOT NULL "+ ");";
 	       stmt.executeUpdate(sql);
 	       stmt.close();
 	       c.close();

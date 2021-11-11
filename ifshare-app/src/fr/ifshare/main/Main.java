@@ -39,8 +39,10 @@ public class Main {
 			System.out.println("Store start");
 			StoreDB db = new StoreDB();
 			db.createNewDatabase("storedb");
-			db.createTable("storedb");
-			db.insert("storedb",new Product("Samsung Galaxy S10", 1, (float)1300.6, State.NEW));
+			db.createTableProduct("storedb");
+			db.createTableOnSale("storedb");
+			db.createTableAnnounce("storedb");
+			//db.insertProduct("storedb",new Product("Samsung Galaxy S10", 1, (float)1300.6, State.NEW));
 			db.getProducts("storedb");
 			
 		} catch (Exception e) {
