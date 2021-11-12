@@ -4,47 +4,92 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
+/**
+ * Store interface
+ */
 public interface IStore extends Remote {
 	/**
-	 * Returns a product copy.
+	 * Returns the product with the specified id.
 	 * 
-	 * @param idProduct
-	 * @return
+	 * @param idAnnounce	the id whose associated announce contains product
+	 * @param idProduct		the id whose associated product is to be returned
+	 * @return				the product to which the specified idProduct is mapped, or null if 
+	 * 						this announce contains no mapping for the idProduct
 	 * @throws RemoteException
+	 * @see					Product
 	 */
-	Product getProduct(int Announce, int idProduct) throws RemoteException;
-	
-	void createAnnounce(String label, String description, Product firstProduct, List<String> tags) throws RemoteException;
-	
-	void addProductToAnnounce(int idAnnounce, Product product) throws RemoteException;
-	
-	Announce getAnnounce(int idAnnounce) throws RemoteException;
-	
-	List<Announce> getAnnounces() throws RemoteException;
+	Product getProduct(int idAnnounce, int idProduct) throws RemoteException;
 	
 	/**
-	 * Returns the list of all products in the store.
+	 * Returns the list of all products associated to the specified announce.
 	 * 
-	 * @return a list of products
+	 * @param idAnnounce 	the id of the announce
+	 * @return 				a list of products
 	 * @throws RemoteException
+	 * @see 				Product
 	 */
 	List<Product> getProducts(int idAnnounce) throws RemoteException;
 	
 	/**
-	 * Remove the product of the store.
+	 * Creates a new announce with one product and add it in this store.
 	 * 
-	 * @param idProduct the id of the product that has just been purchased
-	 * @param idEmployee the id of the employee who buys the product
+	 * @param label 		the label of this new announce
+	 * @param description	the description of this new announce
+	 * @param firstProduct	the first product that will be added to this new announce
+	 * @param tags			a list of tags to link to this new announce
+	 * @param category		the main category for this new announce
+	 * @throws RemoteException
+	 * @see					Announce
+	 * @see					Product
+	 */
+	void createAnnounce(String label, String description, Product firstProduct, List<String> tags, String category) throws RemoteException;
+	
+	/**
+	 * Adds the specified product to the specified announce.
+	 * 
+	 * @param idAnnounce	the id of the announce that will be updated
+	 * @param product		the product that will be add to the announce
+	 * @throws RemoteException
+	 * @see					Product
+	 */
+	void addProductToAnnounce(int idAnnounce, Product product) throws RemoteException;
+	
+	/**
+	 * Returns the announce with the specified id or <code>null</code> if 
+	 * this store contains no mapping for the id.
+	 * 
+	 * @param idAnnounce	the id whose associated announce is to be returned
+	 * @return				the announce to which the specified id is mapped, or null if this store contains no mapping for the id
+	 * @throws RemoteException
+	 * @see					Announce
+	 */
+	Announce getAnnounce(int idAnnounce) throws RemoteException;
+	
+	/**
+	 * Returns the lists of all announces of this store, the list can be empty.
+	 * 
+	 * @return 				a list of announce
+	 * @throws RemoteException
+	 * @see 				Announce
+	 */
+	List<Announce> getAnnounces() throws RemoteException;
+	
+	/**
+	 * Removes the product of this store.
+	 * 
+	 * @param idAnnounce 	the id of the announce which contains the product that has just been purchased
+	 * @param idProduct 	the id of the product that has just been purchased
+	 * @param idEmployee 	the id of the employee who buys the product
 	 * @throws RemoteException
 	 */
 	void buyProduct(int idAnnounce, int idProduct, int idEmployee) throws RemoteException;
 	
 	/**
-	 * Adding a note to the specified announce.
+	 * Adds a note to the specified announce.
 	 * 
-	 * @param idAnnounce the id of the announce that is rated
-	 * @param rate the rate to add
-	 * @param comment the comment of the client to add
+	 * @param idAnnounce 	the id of the announce that is rated
+	 * @param rate 			the rate to add
+	 * @param comment 		the comment of the client to add
 	 * @throws RemoteException
 	 */
 	void rateAnnounce(int idAnnounce, double rate, String comment) throws RemoteException;

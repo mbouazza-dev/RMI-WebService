@@ -1,7 +1,6 @@
 package fr.sharedclasses;
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,11 +17,11 @@ public class Announce implements Serializable {
 	private final List<Rating> rates;
 	private final String label;
 	private final String description;
-	private boolean closed = false;
+	private final String category;
 	private final Map<Integer, Product> products; // <idProduct, Product>
 	
 	
-	public Announce(String label, String description, Product firstProduct, List<String> tags) {
+	public Announce(String label, String description, Product firstProduct, List<String> tags, String category) {
 		this.id = SERIAL_ID++;
 		this.label = Objects.requireNonNull(label);
 		this.description = Objects.requireNonNull(description);
@@ -30,6 +29,7 @@ public class Announce implements Serializable {
 		this.rates = new ArrayList<>();
 		this.products = new HashMap<>();
 		this.products.put(firstProduct.getId(), firstProduct);
+		this.category = category;
 	}
 		
 	public int getId() {
@@ -44,6 +44,18 @@ public class Announce implements Serializable {
 		return description;
 	}
 	
+	public String getCategory() {
+		return category;
+	}
+
+	public List<String> getTags() {
+		return tags;
+	}
+
+	public List<Rating> getRates() {
+		return rates;
+	}
+
 	public void addProduct(Product product) {
 		if (!products.containsKey(product.getId())) {
 			products.put(product.getId(), product);

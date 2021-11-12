@@ -1,7 +1,6 @@
 package fr.sharedclasses;
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +17,6 @@ public class Announce implements Serializable {
 	private final List<Rating> rates;
 	private final String label;
 	private final String description;
-	private boolean closed = false;
 	private final String category;
 	private final Map<Integer, Product> products; // <idProduct, Product>
 	

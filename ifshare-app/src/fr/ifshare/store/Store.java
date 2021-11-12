@@ -47,9 +47,9 @@ public class Store extends UnicastRemoteObject implements IStore {
 	}
 
 	@Override
-	public void createAnnounce(String label, String description, Product firstProduct, List<String> tags)
+	public void createAnnounce(String label, String description, Product firstProduct, List<String> tags, String category)
 			throws RemoteException {
-		Announce announce = new Announce(label, description, firstProduct, tags);
+		Announce announce = new Announce(label, description, firstProduct, tags, category);
 		announces.put(announce.getId(), announce);
 	}
 

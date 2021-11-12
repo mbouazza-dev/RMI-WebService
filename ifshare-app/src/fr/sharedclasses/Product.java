@@ -1,11 +1,7 @@
 package fr.sharedclasses;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Objects;
-import java.util.Queue;
 
 public class Product implements Serializable {
 	
@@ -15,7 +11,6 @@ public class Product implements Serializable {
 	private final int id;
 	private final String label;
 	private final int idEmployee;
-	private final List<Rating> rates = new ArrayList<>();
 	private final float price;
 	private final State state;
 	
@@ -50,26 +45,7 @@ public class Product implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "(" +id+ ") " +label+ " : " +getRate()+ " star(s), comment(s) : " +rates.toString();
+		return "(" +id+ ") Employe n°" +idEmployee+ ", Etat : " +state+ ", prix : " +price;
 	}
-	
-	/**
-	 * Add a new rating to this product.
-	 * 
-	 * @param rating
-	 */
-	public void addRate(Rating rating) {
-		rates.add(rating);
-	}
-	
-	/**
-	 * Get a average rate.
-	 * 
-	 * @return
-	 */
-	public double getRate() {
-		return rates.stream().mapToDouble(e -> e.getRate()).average().orElse(0);
-	}
-	
 	
 }
