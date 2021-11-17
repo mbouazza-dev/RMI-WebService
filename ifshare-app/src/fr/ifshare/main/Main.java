@@ -42,7 +42,7 @@ public class Main {
 			db.createTableProduct("storedb");
 			db.createTableOnSale("storedb");
 			db.createTableAnnounce("storedb");
-			//db.insertProduct("storedb",new Product("Samsung Galaxy S10", 1, (float)1300.6, State.NEW));
+			db.insertProduct("storedb",new Product("Samsung Galaxy S10", 1, (float)1300.6, State.NEW));
 			db.getProducts("storedb");
 			
 		} catch (Exception e) {
