@@ -1,21 +1,18 @@
 package fr.uge.employee;
 
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Employee {
-	
-	private static final AtomicInteger count = new AtomicInteger(0);
-	private int id;
-	private String name;
-	private String firstName;
+	private final int id;
+	private final String name;
+	private final String firstName;
 	private long balance;
 	
 	public Employee(int id, String name, String firstName, long balance) {
-		this.id = count.incrementAndGet();
+		this.id = id;
 		this.name = Objects.requireNonNull(name);
 		this.firstName = Objects.requireNonNull(firstName);
-		this.balance = Objects.requireNonNull(balance);
+		this.balance = balance;
 	}
 	
 	public int getId() {

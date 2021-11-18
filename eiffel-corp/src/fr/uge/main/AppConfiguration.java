@@ -9,9 +9,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import fr.sharedclasses.IStore;
+import fr.uge.employee.EmployeesDB;
 
 @Configuration
 public class AppConfiguration {
+	
+	@Bean
+	public EmployeesDB getEmployeesDB() {
+		return new EmployeesDB();
+	}
 	
 	@Bean
 	public IStore getStore() throws MalformedURLException, RemoteException, NotBoundException {

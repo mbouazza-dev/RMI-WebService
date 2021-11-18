@@ -5,7 +5,8 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 /**
- * Store interface
+ * This interface contains all available public methods of a Store.
+ * 
  */
 public interface IStore extends Remote {
 	/**
@@ -39,7 +40,7 @@ public interface IStore extends Remote {
 	 * @param tags			a list of tags to link to this new announce
 	 * @param category		the main category for this new announce
 	 * @throws RemoteException
-	 * @see					Announce
+	 * @see					IAnnounce
 	 * @see					Product
 	 */
 	void createAnnounce(String label, String description, Product firstProduct, List<String> tags, String category) throws RemoteException;
@@ -61,18 +62,18 @@ public interface IStore extends Remote {
 	 * @param idAnnounce	the id whose associated announce is to be returned
 	 * @return				the announce to which the specified id is mapped, or null if this store contains no mapping for the id
 	 * @throws RemoteException
-	 * @see					Announce
+	 * @see					IAnnounce
 	 */
-	Announce getAnnounce(int idAnnounce) throws RemoteException;
+	IAnnounce getAnnounce(int idAnnounce) throws RemoteException;
 	
 	/**
 	 * Returns the lists of all announces of this store, the list can be empty.
 	 * 
 	 * @return 				a list of announce
 	 * @throws RemoteException
-	 * @see 				Announce
+	 * @see 				IAnnounce
 	 */
-	List<Announce> getAnnounces() throws RemoteException;
+	List<IAnnounce> getAnnounces() throws RemoteException;
 	
 	/**
 	 * Removes the product of this store.

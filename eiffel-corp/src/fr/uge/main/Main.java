@@ -48,7 +48,7 @@ public class Main {
 	public static void main(String[] args) throws RemoteException {
 		SpringApplication.run(Main.class, args);
 		try {
-			setSecurityPolicy("resources/rmi_policy/security.policy");
+			//setSecurityPolicy("resources/rmi_policy/security.policy");
 			displayHelp();
 		} catch (Exception e) {
 			System.err.println("Erreur");

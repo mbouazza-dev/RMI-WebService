@@ -4,13 +4,13 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
-import fr.sharedclasses.Announce;
+import fr.sharedclasses.IAnnounce;
 import fr.sharedclasses.IStore;
 import fr.sharedclasses.Product;
 import fr.sharedclasses.Rating;
-import fr.sharedclasses.Product.State;
 
 public class Store extends UnicastRemoteObject implements IStore {
 	private final HashMap<Integer, Announce> announces; // <idAnnounce, Announce>
@@ -18,6 +18,11 @@ public class Store extends UnicastRemoteObject implements IStore {
 	public Store() throws RemoteException {
 		super();
 		announces = new HashMap<>();
+	}
+	
+	public void addAnnounce(Announce announce) throws RemoteException {
+		Objects.requireNonNull(announces);
+		announces.put(announce.getId(), announce);
 	}
 
 	@Override
@@ -40,10 +45,11 @@ public class Store extends UnicastRemoteObject implements IStore {
 
 	@Override
 	public void rateAnnounce(int idAnnounce, double rate, String comment) throws RemoteException {
-		announces.computeIfPresent(idAnnounce, (x, y) -> {
-			y.addRate(new Rating(rate, comment));
-			return y;
-		});
+		if (announces.containsKey(idAnnounce)) {
+			Announce announce = announces.get(idAnnounce);
+			announce.addRate(new Rating(rate, comment));
+			announces.put(idAnnounce, announce);
+		}
 	}
 
 	@Override
@@ -62,12 +68,12 @@ public class Store extends UnicastRemoteObject implements IStore {
 	}
 
 	@Override
-	public Announce getAnnounce(int idAnnounce) throws RemoteException {
+	public IAnnounce getAnnounce(int idAnnounce) throws RemoteException {
 		return announces.get(idAnnounce);
 	}
 
 	@Override
-	public List<Announce> getAnnounces() throws RemoteException {
+	public List<IAnnounce> getAnnounces() throws RemoteException {
 		return announces.values().stream().collect(Collectors.toList());
 	}
 
