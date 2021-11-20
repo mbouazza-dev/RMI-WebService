@@ -13,18 +13,9 @@ import fr.sharedclasses.Product;
 import fr.sharedclasses.Product.State;
 
 public class Main {
-	
-	@SuppressWarnings("deprecation")
-	private static void setSecurityPolicy(String securityFilePath) {
-		System.setProperty("java.security.policy", securityFilePath);
-	    if (System.getSecurityManager() == null) {
-	        System.setSecurityManager(new RMISecurityManager());
-	    }
-	}
 
 	public static void main(String[] args) {
 		try {
-			setSecurityPolicy("resources/rmi_policy/security.policy");
 			LocateRegistry.createRegistry(1099);
 			Store store = new Store();
 			store.addAnnounce(new Announce("Samsung S10", "Le smartphone qui vous immerge dans l'image avec son écran Infinity 6,1\" Full HD+.", new Product("Samsung Galaxy S10", 1, 250.f, State.ALMOST_NEW), Arrays.asList(new String[] {"Samsung S10", "Téléphone", "64Go"}), "Téléphone", new NotificationReplenishmentObserver()));

@@ -35,20 +35,10 @@ public class Main {
 		System.out.println("Liste des commandes disponibles :");
 		//System.out.println(commands.stream().map(Command::toString).collect(Collectors.joining("\n")));
 	}
-	
-	@SuppressWarnings("deprecation")
-	private static void setSecurityPolicy(String securityFilePath) {
-		System.setProperty("java.security.policy", securityFilePath);
-	    if (System.getSecurityManager() == null) {
-	        System.setSecurityManager(new RMISecurityManager());
-	    }
-	}
-	
 
 	public static void main(String[] args) throws RemoteException {
 		SpringApplication.run(Main.class, args);
 		try {
-			//setSecurityPolicy("resources/rmi_policy/security.policy");
 			displayHelp();
 		} catch (Exception e) {
 			System.err.println("Erreur");
