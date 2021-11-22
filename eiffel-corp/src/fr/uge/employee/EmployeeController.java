@@ -115,7 +115,7 @@ public class EmployeeController {
 			return "redirect:/login"; // si non connecté on redirige vers la page de connexion
 		}
 		IAnnounce announce = store.getAnnounce(idAnnounce);
-		announce.registerObserver(new NotificationObserver());
+		announce.registerObserver(new NotificationObserver(db));
 		if (announce.notifyEmployee(idEmployee)) {
 			redirectAttrs.addFlashAttribute("toastMessage", "Vous avez été ajouté à la file d'attente.");
 		} else {
