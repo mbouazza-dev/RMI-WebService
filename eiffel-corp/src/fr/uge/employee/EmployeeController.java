@@ -50,7 +50,7 @@ public class EmployeeController {
 	
 	@PostMapping("/login")
 	public String submitLogin(@ModelAttribute LoginInformation login, Model model, HttpSession session) {
-		Employee employee = new Employee(login.getId(), "toto", "titi", 500); // call db instead
+		Employee employee = new Employee(login.getId(), "toto", "titi", 500, "test"); // call db instead
 		
 		// TODO : Check password here
 		// if ok : save sessionId in sessions

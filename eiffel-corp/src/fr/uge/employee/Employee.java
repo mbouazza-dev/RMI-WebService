@@ -7,12 +7,14 @@ public class Employee {
 	private final String name;
 	private final String firstName;
 	private long balance;
+	private String password;
 	
-	public Employee(int id, String name, String firstName, long balance) {
+	public Employee(int id, String name, String firstName, long balance, String password) {
 		this.id = id;
 		this.name = Objects.requireNonNull(name);
 		this.firstName = Objects.requireNonNull(firstName);
 		this.balance = balance;
+		this.password = password;
 	}
 	
 	public int getId() {
