@@ -7,14 +7,16 @@ public class Employee {
 	private final String name;
 	private final String firstName;
 	private long balance;
-	private String password;
+	private final String email;
+	private final String password;
 	
-	public Employee(int id, String name, String firstName, long balance, String password) {
+	public Employee(int id, String name, String firstName, long balance, String email, String password) {
 		this.id = id;
 		this.name = Objects.requireNonNull(name);
 		this.firstName = Objects.requireNonNull(firstName);
 		this.balance = balance;
-		this.password = password;
+		this.email = Objects.requireNonNull(email);
+		this.password = Objects.requireNonNull(password);
 	}
 	
 	public int getId() {
@@ -31,6 +33,14 @@ public class Employee {
 
 	public long getBalance() {
 		return balance;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public String getPassword() {
+		return password;
 	}
 	
 }

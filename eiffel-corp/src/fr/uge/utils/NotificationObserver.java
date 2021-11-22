@@ -2,6 +2,7 @@ package fr.uge.utils;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Optional;
 
 import fr.sharedclasses.AnnounceObserver;
 import fr.sharedclasses.IAnnounce;
@@ -23,8 +24,12 @@ public class NotificationObserver extends UnicastRemoteObject implements Announc
 
 	@Override
 	public void onReplenishment(IAnnounce announce, int idEmployee) throws RemoteException {
-		// System.out.println("Client side : employee n°" + idEmployee + " replenishment on " +announce);		
-		Employee employee = db.getById(idEmployee);
-		emailService.sendSimpleMessage(employee, announce);
+		System.out.println("Client side");
+		Optional<Employee> employee = db.getById(idEmployee);
+		if (employee.isPresent() ) {
+			emailService.sendSimpleMessage(employee.get(), announce);
+		} else {
+			System.err.println("L'id " +idEmployee+ " n'est relié à aucun employé en base de données.");
+		}
 	}
 }

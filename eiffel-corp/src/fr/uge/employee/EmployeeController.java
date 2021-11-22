@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import fr.sharedclasses.IAnnounce;
 import fr.sharedclasses.IStore;
 import fr.uge.utils.NotificationObserver;
+import fr.uge.utils.PasswordValidator;
 
 @Controller
 public class EmployeeController {
@@ -50,20 +51,22 @@ public class EmployeeController {
 	
 	@PostMapping("/login")
 	public String submitLogin(@ModelAttribute LoginInformation login, Model model, HttpSession session) {
-		Employee employee = new Employee(login.getId(), "toto", "titi", 500, "test"); // call db instead
+		Optional<Employee> employeeOptional = db.getById(login.getId());
 		
-		// TODO : Check password here
-		// if ok : save sessionId in sessions
-		Optional<String> oldSessionId = sessions.entrySet().stream().filter(entry -> Objects.equals(entry.getValue(), employee.getId())).map(Map.Entry::getKey).findFirst();
-		if (oldSessionId.isPresent()) {
-			sessions.remove(oldSessionId.get()); // déjà connecté : changement de sessionId
+		if (employeeOptional.isPresent() ) { // si un employee possède bien l'id spécifié
+			Employee employee = employeeOptional.get();
+			if (PasswordValidator.checkPassword(login.getPassword(), employee.getPassword())) { // si le mdp correspond à celui en base
+				// attribution d'un sessionId à l'employé
+				Optional<String> oldSessionId = sessions.entrySet().stream().filter(entry -> Objects.equals(entry.getValue(), employee.getId())).map(Map.Entry::getKey).findFirst();
+				if (oldSessionId.isPresent()) { // si cet employé est déjà connecté
+					sessions.remove(oldSessionId.get()); // changement de sessionId
+				}
+				sessions.put(session.getId(), employee.getId());
+				return "redirect:/announces";
+			}			
 		}
-		sessions.put(session.getId(), employee.getId());
-		// if ko : redirect to /login with error message
 		
-		System.out.println("Login : " +login.getId()+ ", password : " +login.getPassword()); // pour debug
-		
-		return "redirect:/announces";
+		return "redirect:/login";
 	}
 	
 	/**
