@@ -8,7 +8,6 @@ import java.util.Arrays;
 import fr.ifshare.store.Announce;
 import fr.ifshare.store.NotificationReplenishmentObserver;
 import fr.ifshare.store.Store;
-import fr.ifshare.store.StoreDB;
 import fr.sharedclasses.Product;
 import fr.sharedclasses.Product.State;
 
@@ -28,14 +27,6 @@ public class Main {
 
 			Naming.rebind("storeService", store);
 			System.out.println("Store start");
-			
-			StoreDB db = new StoreDB();
-			db.createNewDatabase("storedb");
-			db.createTableProduct("storedb");
-			db.createTableOnSale("storedb");
-			db.createTableAnnounce("storedb");
-			db.insertProduct("storedb",new Product("Samsung Galaxy S10", 1, (float)1300.6, State.NEW));
-			db.getProducts("storedb");
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
