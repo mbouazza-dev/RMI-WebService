@@ -1,17 +1,26 @@
 package fr.uge.employee;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Value;
 
 public class EmployeesDB {
-	private final HashMap<Integer, Employee> employees = new HashMap<>();
+	@Value("${spring.datasource.url}")
+	private String datasourceURL;
+	@Value("${spring.datasource.driverClassName}")
+	private String driverName;
+	@Value("${spring.datasource.username}")
+	private String username;
+	@Value("${spring.datasource.password}")
+	private String password;
+	
 	
 	public void insert(String dbName, Employee emp) {
 		Connection c = null;
@@ -44,8 +53,28 @@ public class EmployeesDB {
 	 * get an employee inside the EmployeeDB using his ID
 	 * @param id represents the employee's id
 	 */
-	public Employee getById(int id) {
-		return employees.get(id);
+	public Optional<Employee> getById(int id) {
+		Optional<Employee> employee = Optional.empty();
+		String sql = "SELECT * FROM EMPLOYEE WHERE ID = ?";
+		try (Connection conn = connect()) {
+			conn.setAutoCommit(false);
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.first()) {
+				String name = rs.getString("NAME");
+				String firstName = rs.getString("FIRSTNAME");
+				long balance = rs.getLong("BALANCE");
+				String email = rs.getString("EMAIL");
+				String password = rs.getString("PASWWORD"); // typo in database
+				
+				Employee empl = new Employee(id, name, firstName, balance, email, password);
+				employee = Optional.of(empl);
+			}
+		} catch (SQLException e) {
+			System.err.println("Erreur lors de la connexion à la base de données Employé : " +e.getMessage());
+		}
+		return employee;
 	}
 	
 	
@@ -110,17 +139,18 @@ public class EmployeesDB {
 	}
 
 	
-	public void connect(String dbName) {
-		Connection c = null;
-	      
-	      try {
-	         Class.forName("org.sqlite.JDBC");
-	         c = DriverManager.getConnection("jdbc:sqlite:db/"+dbName);
-	      } catch ( Exception e ) {
-	         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-	         System.exit(0);
-	      }
-	      System.out.println("Opened database successfully");
+	private Connection connect() {
+		Connection conn = null;
+	    try {
+	    	Class.forName(driverName);
+	    	conn = DriverManager.getConnection(datasourceURL, username, password);
+	    } catch (SQLException e) {
+	    	System.err.println("Connexion à la base de données impossible : " +e.getMessage());
+	    	System.exit(0);
+	    } catch (ClassNotFoundException e) {
+			System.err.println("Erreur de driver : " +e.getMessage());
+		}
+	    return conn;
 	}
 
 	

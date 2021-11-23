@@ -1,7 +1,6 @@
 package fr.ifshare.main;
 
 import java.rmi.Naming;
-import java.rmi.RMISecurityManager;
 import java.rmi.registry.LocateRegistry;
 import java.util.Arrays;
 
@@ -28,8 +27,12 @@ public class Main {
 			Naming.rebind("storeService", store);
 			System.out.println("Store start");
 			
+			// Décomenter et utiliser un point d'arrêt pour tester le réapprovisionnement
+			//store.addProductToAnnounce(3, new Product("Toto", 5, 200.f, State.ALMOST_NEW));
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
