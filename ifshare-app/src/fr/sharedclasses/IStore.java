@@ -89,9 +89,9 @@ public interface IStore extends Remote {
 	 * Adds a note to the specified announce.
 	 * 
 	 * @param idAnnounce 	the id of the announce that is rated
-	 * @param rate 			the rate to add
-	 * @param comment 		the comment of the client to add
+	 * @param rating 		the rating to add
 	 * @throws RemoteException
+	 * @see					Rating
 	 */
-	void rateAnnounce(int idAnnounce, double rate, String comment) throws RemoteException;
+	void rateAnnounce(int idAnnounce, Rating rating) throws RemoteException;
 }

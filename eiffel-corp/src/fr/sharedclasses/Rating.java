@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Rating implements Serializable {
-	private final double rate;
-	private final String comment;
+	private double rate;
+	private String comment;
+	
+	public Rating() { }
 	
 	public Rating(double rate, String comment) {
 		if (rate < 0.f || rate > 5.f) {
@@ -21,6 +23,14 @@ public class Rating implements Serializable {
 	
 	public String getComment() {
 		return comment;
+	}
+	
+	public void setRate(double rate) {
+		this.rate = rate;
+	}
+	
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 	
 	@Override

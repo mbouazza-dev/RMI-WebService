@@ -44,10 +44,10 @@ public class Store extends UnicastRemoteObject implements IStore {
 	}
 
 	@Override
-	public void rateAnnounce(int idAnnounce, double rate, String comment) throws RemoteException {
+	public void rateAnnounce(int idAnnounce, Rating rating) throws RemoteException {
 		if (announces.containsKey(idAnnounce)) {
 			Announce announce = announces.get(idAnnounce);
-			announce.addRate(new Rating(rate, comment));
+			announce.addRate(rating);
 			announces.put(idAnnounce, announce);
 		}
 	}

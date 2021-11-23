@@ -9,6 +9,7 @@ import fr.ifshare.store.NotificationReplenishmentObserver;
 import fr.ifshare.store.Store;
 import fr.sharedclasses.Product;
 import fr.sharedclasses.Product.State;
+import fr.sharedclasses.Rating;
 
 public class Main {
 
@@ -21,8 +22,8 @@ public class Main {
 			store.addAnnounce(new Announce("Le Livre de la Jungle", "Un recueil de nouvelles dont chacune raconte une histoire qui se passe dans la jungle...", new Product("Livre de la jungle", 2, 12.f, State.USED), Arrays.asList(new String[] {"Livre", "Littérature"}), "Livre", new NotificationReplenishmentObserver()));
 			store.addProductToAnnounce(1, new Product("Test",3, 189.f, State.USED));
 			store.buyProduct(3, 3, 5);
-			store.rateAnnounce(1, 4.f, "Bon téléphone");
-			store.rateAnnounce(1, 3.5f, "Rechargement trop long");
+			store.rateAnnounce(1, new Rating(4.f, "Bon téléphone"));
+			store.rateAnnounce(1, new Rating(3.5f, "Rechargement trop long"));
 
 			Naming.rebind("storeService", store);
 			System.out.println("Store start");

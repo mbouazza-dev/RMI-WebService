@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.sharedclasses.IAnnounce;
 import fr.sharedclasses.IStore;
+import fr.sharedclasses.Rating;
 import fr.uge.utils.NotificationObserver;
 import fr.uge.utils.PasswordValidator;
 
@@ -142,6 +144,26 @@ public class EmployeeController {
 		}
 		redirectAttrs.addFlashAttribute("showToast", true);
 		return "redirect:/announces/{idAnnounce}";
+	}
+	
+	@GetMapping("/announces/{idAnnounce}/rate")
+	public String rateProductGet(@PathVariable int idAnnounce, Model model, HttpSession session) throws RemoteException {
+		if (!sessions.containsKey(session.getId())) {
+			return "redirect:/login"; // si non connecté on redirige vers la page de connexion
+		}
+		model.addAttribute("announce", store.getAnnounce(idAnnounce));
+		model.addAttribute("ratingAttribute", new Rating());
+		return "rate_product_form";
+	}
+	
+	@PostMapping("/announces/{idAnnounce}/rate")
+	public String rateProductPost(@PathVariable int idAnnounce, @ModelAttribute("ratingAttribute") Rating rating, Model model, HttpSession session) throws RemoteException {
+		if (!sessions.containsKey(session.getId())) {
+			return "redirect:/login"; // si non connecté on redirige vers la page de connexion
+		}
+		store.rateAnnounce(idAnnounce, rating);
+		model.addAttribute("announce", store.getAnnounce(idAnnounce));
+		return "announce";
 	}
 	
 }
