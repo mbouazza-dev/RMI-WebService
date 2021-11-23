@@ -153,8 +153,8 @@ public class Announce extends UnicastRemoteObject implements IAnnounce {
 	}
 	
 	@Override
-	public void soldProduct(int idProduct) throws RemoteException {
-		products.remove(idProduct);
+	public boolean soldProduct(int idProduct) throws RemoteException {
+		return products.remove(idProduct) != null;
 	}
 	
 	@Override

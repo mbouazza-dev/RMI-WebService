@@ -135,8 +135,9 @@ public interface IAnnounce extends Remote {
 	 * Removes from this announce one product.
 	 * 
 	 * @param idProduct	the id of the product that was sold
+	 * @return			<code>true</code> if the product was in the store and has been removed, or <code>false</code> if the product was not in the store
 	 */
-	void soldProduct(int idProduct) throws RemoteException;
+	boolean soldProduct(int idProduct) throws RemoteException;
 	
 	/**
 	 * Unregisters the specified observer of this announce.

@@ -107,22 +107,38 @@ public class EmployeeController {
 	/**
 	 * 
 	 * @param idAnnounce
-	 * @param idEmployee
 	 * @param redirectAttrs
 	 * @return
 	 * @throws RemoteException
 	 */
-	@GetMapping("/announces/{idAnnounce}/{idEmployee}")
-	public String addQueueEmployee(@PathVariable int idAnnounce, @PathVariable int idEmployee, RedirectAttributes redirectAttrs, HttpSession session) throws RemoteException {
+	@GetMapping("/announces/{idAnnounce}/queue")
+	public String addQueueEmployee(@PathVariable int idAnnounce, RedirectAttributes redirectAttrs, HttpSession session) throws RemoteException {
 		if (!sessions.containsKey(session.getId())) {
 			return "redirect:/login"; // si non connecté on redirige vers la page de connexion
 		}
+		int idEmployee = sessions.get(session.getId());
 		IAnnounce announce = store.getAnnounce(idAnnounce);
 		announce.registerObserver(new NotificationObserver(db));
 		if (announce.notifyEmployee(idEmployee)) {
 			redirectAttrs.addFlashAttribute("toastMessage", "Vous avez été ajouté à la file d'attente.");
 		} else {
 			redirectAttrs.addFlashAttribute("toastMessage", "Une erreur est survenue lors de votre ajout à la file d'attente.");
+		}
+		redirectAttrs.addFlashAttribute("showToast", true);
+		return "redirect:/announces/{idAnnounce}";
+	}
+	
+	@GetMapping("/announces/{idAnnounce}/{idProduct}")
+	public String buyProduct(@PathVariable int idAnnounce, @PathVariable int idProduct, RedirectAttributes redirectAttrs, HttpSession session) throws RemoteException {
+		if (!sessions.containsKey(session.getId())) {
+			return "redirect:/login"; // si non connecté on redirige vers la page de connexion
+		}
+		IAnnounce announce = store.getAnnounce(idAnnounce);
+		if (announce.soldProduct(idProduct)) {
+			// produit vendu
+			redirectAttrs.addFlashAttribute("toastMessage", "Commande validée");
+		} else {
+			redirectAttrs.addFlashAttribute("toastMessage", "Désolé mais le produit souhaité a déjà été vendu.");
 		}
 		redirectAttrs.addFlashAttribute("showToast", true);
 		return "redirect:/announces/{idAnnounce}";

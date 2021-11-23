@@ -39,7 +39,7 @@
 							<td th:text="${product.state}"></td>
 							<td th:text="${product.idEmployee}"></td>
 							<td><span th:text="${product.price}" /> €</td>
-							<td>Acheter</td>
+							<td><a th:href="@{/announces/{idAnnounce}/{idProduct}/(idAnnounce=${announce.getId()}, idProduct=${product.id})}">Acheter</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -47,8 +47,7 @@
 			
 			<div th:if="${#lists.isEmpty(products)}">
 				<p>Actuellement il n'y a aucun produit en vente.</p>
-				<!-- Le "1" dans le href doit être remplacé par l'id de l'employé qui clique sur le bouton -->
-				<button type="button" class="btn btn-link"><a th:href="@{/announces/{idAnnounce}/1(idAnnounce = ${announce.getId()})}">Etre averti lorsqu'un nouveau produit sera ajouté</a></button>
+				<button type="button" class="btn btn-link"><a th:href="@{/announces/{idAnnounce}/queue(idAnnounce = ${announce.getId()})}">Etre averti lorsqu'un nouveau produit sera ajouté</a></button>
 			</div>
 		</div>
 
