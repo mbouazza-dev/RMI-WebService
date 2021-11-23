@@ -36,7 +36,7 @@ public class EmployeeController {
 	
 	@GetMapping("/")
 	public String index() {
-		return "redirect:/announces";
+		return "home";
 	}
 	
 	@GetMapping("/login")
