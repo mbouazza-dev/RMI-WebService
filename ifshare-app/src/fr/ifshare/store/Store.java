@@ -63,6 +63,7 @@ public class Store extends UnicastRemoteObject implements IStore {
 	public void addProductToAnnounce(int idAnnounce, Product product) throws RemoteException {
 		if (announces.containsKey(idAnnounce)) {
 			Announce announce = announces.get(idAnnounce);
+			product.setId(announce.getMaxIdProduct() + 1);
 			announce.addProduct(product);
 		}
 	}

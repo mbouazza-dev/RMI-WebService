@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.sharedclasses.IAnnounce;
 import fr.sharedclasses.IStore;
+import fr.sharedclasses.Product;
 import fr.sharedclasses.Rating;
 import fr.uge.utils.NotificationObserver;
 import fr.uge.utils.PasswordValidator;
@@ -162,6 +163,27 @@ public class EmployeeController {
 			return "redirect:/login"; // si non connecté on redirige vers la page de connexion
 		}
 		store.rateAnnounce(idAnnounce, rating);
+		model.addAttribute("announce", store.getAnnounce(idAnnounce));
+		return "announce";
+	}
+	
+	@GetMapping("/announces/{idAnnounce}/sold")
+	public String soldProductGet(@PathVariable int idAnnounce, Model model, HttpSession session) throws RemoteException {
+		if (!sessions.containsKey(session.getId())) {
+			return "redirect:/login"; // si non connecté on redirige vers la page de connexion
+		}
+		model.addAttribute("announce", store.getAnnounce(idAnnounce));
+		model.addAttribute("productAttribute", new Product());
+		model.addAttribute("stateOptions", Product.getAllState());
+		return "sold_product_form";
+	}
+	
+	@PostMapping("/announces/{idAnnounce}/sold")
+	public String soldProductPost(@PathVariable int idAnnounce, @ModelAttribute("productAttribute") Product product, Model model, HttpSession session) throws RemoteException {
+		if (!sessions.containsKey(session.getId())) {
+			return "redirect:/login"; // si non connecté on redirige vers la page de connexion
+		}
+		store.addProductToAnnounce(idAnnounce, product);
 		model.addAttribute("announce", store.getAnnounce(idAnnounce));
 		return "announce";
 	}

@@ -5,15 +5,37 @@ import java.util.Objects;
 
 public class Product implements Serializable {
 	
-	public enum State { NEW, ALMOST_NEW , USED, BROKEN }
+	public enum State { 
+		NEW("Nouveau"), 
+		ALMOST_NEW("Presque nouveau"), 
+		USED("Usé"), 
+		BROKEN("Cassé");
+		
+		private String frEquivalent;
+		
+		State(final String frEquivalent) {
+			this.frEquivalent = frEquivalent;
+		}
+		
+		public String getFrEquivalent() {
+			return frEquivalent;
+		}	
+	}
+	
+	public static State[] getAllState() {
+		return State.values();
+	}
 	
 	private static int COUNTER = 1;
-	private final int id;
-	private final String label;
-	private final int idEmployee;
-	private final float price;
-	private final State state;
+	private int id;
+	private String label;
+	private int idEmployee;
+	private float price;
+	private State state;
 	
+	public Product() {
+		// Empty constructor for Spring
+	}	
 	
 	public Product(String label, int idEmployee, float price, State state) {
 		this.id = COUNTER++;
@@ -41,6 +63,26 @@ public class Product implements Serializable {
 	
 	public State getState() {
 		return state;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public void setLabel(String label) {
+		this.label = label;
+	}
+	
+	public void setIdEmployee(int idEmployee) {
+		this.idEmployee = idEmployee;
+	}
+	
+	public void setPrice(float price) {
+		this.price = price;
+	}
+	
+	public void setState(State state) {
+		this.state = state;
 	}
 	
 	@Override

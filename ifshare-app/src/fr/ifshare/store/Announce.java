@@ -144,6 +144,11 @@ public class Announce extends UnicastRemoteObject implements IAnnounce {
 	}
 	
 	@Override
+	public int getMaxIdProduct() throws RemoteException {
+		return products.keySet().stream().max(Integer::compareTo).orElse(0);
+	}
+	
+	@Override
 	public boolean notifyEmployee(int idEmployee) throws RemoteException {
 		if (products.size() == 0) {
 			queue.offer(idEmployee);

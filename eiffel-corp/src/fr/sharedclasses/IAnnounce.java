@@ -66,6 +66,8 @@ public interface IAnnounce extends Remote {
 	 */
 	String getLabel() throws RemoteException;
 	
+	int getMaxIdProduct() throws RemoteException;
+	
 	/**
 	 * Returns the minimum price of the products available or -1 if there is no product.
 	 * 
