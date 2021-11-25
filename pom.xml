@@ -18,6 +18,7 @@
 	<modules>
 		<module>eiffel-corp</module>
 		<module>ifshare-app</module>
+		<module>bank</module>
 	</modules>
 
 	<properties>
