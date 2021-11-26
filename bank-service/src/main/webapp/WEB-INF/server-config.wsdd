@@ -51,7 +51,9 @@
   <ns1:parameter name="wsdlServicePort" value="AccountManager"/>
   <ns1:parameter name="schemaQualified" value="http://bank.uge.fr"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://bank.uge.fr"/>
-  <ns1:parameter name="wsdlServiceElement" value="AccountManagerService"/>
+  <ns1:parameter name="wsdlServiceElement" value="AccountManagerService"/><ns1:parameter
+  	name="scope" value="application">
+</ns1:parameter>
  </ns1:service>
  <ns1:transport name="http">
   <ns1:requestFlow>
