@@ -22,7 +22,7 @@ public class AccountManagerServiceLocator extends org.apache.axis.client.Service
     }
 
     // Use to get a proxy class for AccountManager
-    private java.lang.String AccountManager_address = "http://localhost:8080/WebServiceProject/services/AccountManager";
+    private java.lang.String AccountManager_address = "http://localhost:8080/bank-service/services/AccountManager";
 
     public java.lang.String getAccountManagerAddress() {
         return AccountManager_address;

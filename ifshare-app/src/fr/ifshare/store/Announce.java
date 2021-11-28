@@ -2,9 +2,9 @@ package fr.ifshare.store;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -28,7 +28,7 @@ public class Announce extends UnicastRemoteObject implements IAnnounce {
 	private final String category;
 	private final Map<Integer, Product> products; // <idProduct, Product>
 	private final List<AnnounceObserver> observers;
-	private final Queue<Integer> queue;
+	private final Queue<Integer> queue = new ArrayDeque<>();
 	
 	
 	public Announce(String label, String description, Product firstProduct, List<String> tags, String category) throws RemoteException {
@@ -42,7 +42,6 @@ public class Announce extends UnicastRemoteObject implements IAnnounce {
 		this.products.put(firstProduct.getId(), firstProduct);
 		this.category = category;
 		this.observers = new ArrayList<>();
-		this.queue = new LinkedList<>();
 	}
 	
 	public Announce(String label, String description, Product firstProduct, List<String> tags, String category, AnnounceObserver observer) throws RemoteException {
@@ -57,7 +56,6 @@ public class Announce extends UnicastRemoteObject implements IAnnounce {
 		this.category = category;
 		observers = new ArrayList<>();
 		observers.add(observer);
-		queue = new LinkedList<>();
 	}
 	
 	// Getters
@@ -120,7 +118,10 @@ public class Announce extends UnicastRemoteObject implements IAnnounce {
 	// Private methods
 	
 	private void notifyReplenishment() throws RemoteException {
-		int idEmployee = queue.poll();
+		Integer idEmployee = queue.poll();
+		if (idEmployee == null) {
+			return; // Il n'y a personne à notifier
+		}
 		for (AnnounceObserver observer : observers) {
 			observer.onReplenishment(this, idEmployee);
 		}

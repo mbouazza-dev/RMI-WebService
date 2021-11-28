@@ -10,6 +10,8 @@ import fr.ifshare.store.Store;
 import fr.sharedclasses.Product;
 import fr.sharedclasses.Product.State;
 import fr.sharedclasses.Rating;
+import fr.uge.bank.AccountManager;
+import fr.uge.bank.AccountManagerServiceLocator;
 
 public class Main {
 
@@ -30,6 +32,11 @@ public class Main {
 			
 			// Décomenter et utiliser un point d'arrêt pour tester le réapprovisionnement
 			//store.addProductToAnnounce(3, new Product("Toto", 5, 200.f, State.ALMOST_NEW));
+			
+			AccountManager manager = new AccountManagerServiceLocator().getAccountManager();
+			System.out.println(manager.amount(2));
+			manager.deposit(40, 2);
+			System.out.println(manager.amount(2));
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
