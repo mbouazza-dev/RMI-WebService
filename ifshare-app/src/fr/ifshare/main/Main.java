@@ -4,6 +4,10 @@ import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 import java.util.Arrays;
 
+import com.currencysystem.webservices.currencyserver.CurncsrvReturnRate;
+import com.currencysystem.webservices.currencyserver.CurrencyServerLocator;
+import com.currencysystem.webservices.currencyserver.CurrencyServerSoap;
+
 import fr.ifshare.store.Announce;
 import fr.ifshare.store.NotificationReplenishmentObserver;
 import fr.ifshare.store.Store;
@@ -33,10 +37,15 @@ public class Main {
 			// Décomenter et utiliser un point d'arrêt pour tester le réapprovisionnement
 			//store.addProductToAnnounce(3, new Product("Toto", 5, 200.f, State.ALMOST_NEW));
 			
+			// Exemple d'utilisation du service bank-service
 			AccountManager manager = new AccountManagerServiceLocator().getAccountManager();
 			System.out.println(manager.amount(2));
 			manager.deposit(40, 2);
 			System.out.println(manager.amount(2));
+			
+			// Exemple d'utilisation du service de conversion de devise
+			CurrencyServerSoap toto = new CurrencyServerLocator().getCurrencyServerSoap();
+			System.out.println(toto.convert("", "EUR", "USD", 1, true, "", CurncsrvReturnRate.curncsrvReturnRateNumber, "", ""));
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
