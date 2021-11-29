@@ -121,12 +121,12 @@ public class EmployeeController {
 		}
 		int idEmployee = sessions.get(session.getId());
 		IAnnounce announce = store.getAnnounce(idAnnounce);
-		announce.registerObserver(new NotificationObserver(db));
-		if (announce.notifyEmployee(idEmployee)) {
-			redirectAttrs.addFlashAttribute("toastMessage", "Vous avez été ajouté à la file d'attente.");
-		} else {
-			redirectAttrs.addFlashAttribute("toastMessage", "Une erreur est survenue lors de votre ajout à la file d'attente.");
-		}
+//		announce.registerObserver(new NotificationObserver(db));
+//		if (announce.notifyEmployee(idEmployee)) {
+//			redirectAttrs.addFlashAttribute("toastMessage", "Vous avez été ajouté à la file d'attente.");
+//		} else {
+//			redirectAttrs.addFlashAttribute("toastMessage", "Une erreur est survenue lors de votre ajout à la file d'attente.");
+//		}
 		redirectAttrs.addFlashAttribute("showToast", true);
 		return "redirect:/announces/{idAnnounce}";
 	}

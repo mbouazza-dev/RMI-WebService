@@ -116,13 +116,6 @@ public interface IAnnounce extends Remote {
 	 */
 	List<String> getTags() throws RemoteException;
 	
-	/**
-	 * Adds an employee to the announce queue, only if there is no products available.
-	 * 
-	 * @param idEmployee	the id of the employee to notify
-	 * @return				<code>true</code> if the employee was added to the queue, or <code>false</code>
-	 */
-	boolean notifyEmployee(int idEmployee) throws RemoteException;
 	
 	/**
 	 * Registers an observer on this announce.
@@ -131,23 +124,6 @@ public interface IAnnounce extends Remote {
 	 * @throws NullPointerException	if the observer is null
 	 * @see							IAnnounceObserver
 	 */
-	void registerObserver(IAnnounceObserver observer) throws RemoteException;
-	
-	/**
-	 * Removes from this announce one product.
-	 * 
-	 * @param idProduct	the id of the product that was sold
-	 * @return			<code>true</code> if the product was in the store and has been removed, or <code>false</code> if the product was not in the store
-	 */
 	boolean soldProduct(int idProduct) throws RemoteException;
 	
-	/**
-	 * Unregisters the specified observer of this announce.
-	 * 
-	 * @param observer					the observer to remove
-	 * @throws NullPointerException		if the observer is null
-	 * @throws IllegalStateException	if this announce do not contains the specified observer
-	 * @see								IAnnounceObserver
-	 */
-	void unregisterObserver(IAnnounceObserver observer) throws RemoteException;
 }

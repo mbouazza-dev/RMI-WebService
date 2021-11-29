@@ -34,7 +34,7 @@ public class AnnounceObserver extends UnicastRemoteObject implements IAnnounceOb
 		return queue;
 	}
 	
-	public void add(int announceId, String mail) {
+	public void register(int announceId, String mail) {
 		Objects.requireNonNull(mail);
 		Queue<String> queue = getOrCreate(announceId);
 		queue.add(mail);

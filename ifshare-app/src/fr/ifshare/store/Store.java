@@ -14,10 +14,12 @@ import fr.sharedclasses.Rating;
 
 public class Store extends UnicastRemoteObject implements IStore {
 	private final HashMap<Integer, Announce> announces; // <idAnnounce, Announce>
+	private final AnnounceObserver announceObserver;
 
 	public Store() throws RemoteException {
 		super();
 		announces = new HashMap<>();
+		announceObserver = new AnnounceObserver();
 	}
 	
 	public void addAnnounce(Announce announce) throws RemoteException {
@@ -65,6 +67,8 @@ public class Store extends UnicastRemoteObject implements IStore {
 			Announce announce = announces.get(idAnnounce);
 			product.setId(announce.getMaxIdProduct() + 1);
 			announce.addProduct(product);
+		}  else {
+			throw new IllegalStateException("The announce with id " + idAnnounce + " does not exists");
 		}
 	}
 
@@ -77,5 +81,6 @@ public class Store extends UnicastRemoteObject implements IStore {
 	public List<IAnnounce> getAnnounces() throws RemoteException {
 		return announces.values().stream().collect(Collectors.toList());
 	}
+	
 
 }
