@@ -11,11 +11,11 @@ import fr.sharedclasses.IAnnounceObserver;
 import fr.sharedclasses.IAnnounce;
 
 /**
- * Classe implémentant le patron Observer afin de permettre la notification des clients 
- * inscrit sur la liste d'attente d'une annonce lorsqu'un produit est à nouveau disponible.
+ * Classe implementing Observer pattern to allow notification on client.
+ * Waitting client was notified when a product is available again if they are registered on its queue.
  * 
- * La classe possède une Hashmap permettant de retrouver une file d'attente d'email en 
- * fonction de l'id d'une annonce.
+ * This class owns a Hashmap<Announce ID, List<Client Mail>> to retrieve the list of waiters client for 
+ * a given announce.
  */
 public class AnnounceObserver extends UnicastRemoteObject implements IAnnounceObserver {
 	
@@ -34,18 +34,38 @@ public class AnnounceObserver extends UnicastRemoteObject implements IAnnounceOb
 		return queue;
 	}
 	
-	public void register(int announceId, String mail) {
+	@Override
+	public void register(int announceId, String mail) throws RemoteException {
 		Objects.requireNonNull(mail);
 		Queue<String> queue = getOrCreate(announceId);
 		queue.add(mail);
 		map.put(announceId, queue);
 	}
 	
-	
+	@Override
+	public void unregister(int announceId, String mail) throws RemoteException {
+		Objects.requireNonNull(mail);
+		Queue<String> queue = map.get(announceId);
+		if(queue == null || !queue.remove(mail)) {
+			throw new IllegalStateException();
+		}
+	}
 	
 	@Override
 	public void onReplenishment(IAnnounce announce) throws RemoteException {
 		Objects.requireNonNull(announce);
-		System.out.println("L'announce " + announce.getLabel() + " a de nouveaux produits disponibles." );
+		if(!containsWaiters(announce.getId())) {
+			return;
+		}
+		Queue<String> queue = map.get(announce.getId());
+		for(String mail: queue) {
+			System.out.println(mail + ":> L'announce " + announce.getLabel() + " a de nouveaux produits disponibles." );
+		}
+		queue.clear();
+	}
+	
+	public boolean containsWaiters(int announceId) {
+		Queue<String> queue = map.get(announceId);
+		return queue != null && !queue.isEmpty();
 	}
 }
