@@ -14,10 +14,12 @@ import fr.sharedclasses.Rating;
 
 public class Store extends UnicastRemoteObject implements IStore {
 	private final HashMap<Integer, Announce> announces; // <idAnnounce, Announce>
+	private final AnnounceObserver announceObserver;
 
 	public Store() throws RemoteException {
 		super();
 		announces = new HashMap<>();
+		announceObserver = new AnnounceObserver();
 	}
 	
 	public void addAnnounce(Announce announce) throws RemoteException {
@@ -64,7 +66,12 @@ public class Store extends UnicastRemoteObject implements IStore {
 		if (announces.containsKey(idAnnounce)) {
 			Announce announce = announces.get(idAnnounce);
 			product.setId(announce.getMaxIdProduct() + 1);
+			if(announce.empty() && announceObserver.containsWaiters(idAnnounce)) {
+				announceObserver.onReplenishment(announce);
+			}
 			announce.addProduct(product);
+		}  else {
+			throw new IllegalStateException("The announce with id " + idAnnounce + " does not exists");
 		}
 	}
 
@@ -77,5 +84,21 @@ public class Store extends UnicastRemoteObject implements IStore {
 	public List<IAnnounce> getAnnounces() throws RemoteException {
 		return announces.values().stream().collect(Collectors.toList());
 	}
-
+	
+	@Override
+	public void registerClientOnQueue(int announceId, String mail) throws RemoteException{
+		Announce announce = announces.get(announceId);
+		if(announce == null) {
+			throw new IllegalStateException("this announce with id " + announceId + " does not exist.");
+		}
+		if(!announce.empty()) {
+			throw new IllegalStateException("this announce with id " + announceId + " still contains products.");
+		}
+		announceObserver.register(announceId, mail);
+	}
+	
+	@Override
+	public void UnregisterClientsOnReplenishment(int announceId, String mail) throws RemoteException {
+		announceObserver.unregister(announceId, mail);
+	}
 }
