@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.Queue;
 import java.util.stream.Collectors;
 
-import fr.sharedclasses.AnnounceObserver;
+import fr.sharedclasses.IAnnounceObserver;
 import fr.sharedclasses.IAnnounce;
 import fr.sharedclasses.Product;
 import fr.sharedclasses.Rating;
@@ -27,7 +27,7 @@ public class Announce extends UnicastRemoteObject implements IAnnounce {
 	private final String description;
 	private final String category;
 	private final Map<Integer, Product> products; // <idProduct, Product>
-	private final List<AnnounceObserver> observers;
+	private final List<IAnnounceObserver> observers;
 	private final Queue<Integer> queue = new ArrayDeque<>();
 	
 	
@@ -44,7 +44,7 @@ public class Announce extends UnicastRemoteObject implements IAnnounce {
 		this.observers = new ArrayList<>();
 	}
 	
-	public Announce(String label, String description, Product firstProduct, List<String> tags, String category, AnnounceObserver observer) throws RemoteException {
+	public Announce(String label, String description, Product firstProduct, List<String> tags, String category, IAnnounceObserver observer) throws RemoteException {
 		super();
 		id = SERIAL_ID++;
 		this.label = Objects.requireNonNull(label);
@@ -122,7 +122,7 @@ public class Announce extends UnicastRemoteObject implements IAnnounce {
 		if (idEmployee == null) {
 			return; // Il n'y a personne à notifier
 		}
-		for (AnnounceObserver observer : observers) {
+		for (IAnnounceObserver observer : observers) {
 			observer.onReplenishment(this, idEmployee);
 		}
 	}
@@ -164,12 +164,12 @@ public class Announce extends UnicastRemoteObject implements IAnnounce {
 	}
 	
 	@Override
-	public void registerObserver(AnnounceObserver observer) throws RemoteException {
+	public void registerObserver(IAnnounceObserver observer) throws RemoteException {
 		observers.add(Objects.requireNonNull(observer));
 	}
 	
 	@Override
-	public void unregisterObserver(AnnounceObserver observer) throws RemoteException {
+	public void unregisterObserver(IAnnounceObserver observer) throws RemoteException {
 		if (!observers.remove(Objects.requireNonNull(observer))) {
 			throw new IllegalStateException();
 		}

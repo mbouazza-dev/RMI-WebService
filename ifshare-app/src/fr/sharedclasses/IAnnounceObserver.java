@@ -3,7 +3,7 @@ package fr.sharedclasses;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-public interface AnnounceObserver extends Remote {
+public interface IAnnounceObserver extends Remote {
 	
 	/**
 	 * Throws when a new product is added to an Announce.
@@ -13,5 +13,5 @@ public interface AnnounceObserver extends Remote {
 	 * @throws RemoteException
 	 * @see						IAnnounce
 	 */
-	void onReplenishment(IAnnounce announce, int idEmployee) throws RemoteException;
+	void onReplenishment(IAnnounce announce) throws RemoteException;
 }

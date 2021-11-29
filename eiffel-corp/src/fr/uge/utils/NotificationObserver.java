@@ -4,12 +4,12 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Optional;
 
-import fr.sharedclasses.AnnounceObserver;
+import fr.sharedclasses.IAnnounceObserver;
 import fr.sharedclasses.IAnnounce;
 import fr.uge.employee.Employee;
 import fr.uge.employee.EmployeesDB;
 
-public class NotificationObserver extends UnicastRemoteObject implements AnnounceObserver {
+public class NotificationObserver extends UnicastRemoteObject implements IAnnounceObserver {
 	
 	private final NotificationEmailService emailService;
 	private final EmployeesDB db;
@@ -23,13 +23,13 @@ public class NotificationObserver extends UnicastRemoteObject implements Announc
 	}
 
 	@Override
-	public void onReplenishment(IAnnounce announce, int idEmployee) throws RemoteException {
-		System.out.println("Client side");
-		Optional<Employee> employee = db.getById(idEmployee);
-		if (employee.isPresent() ) {
-			emailService.sendSimpleMessage(employee.get(), announce);
-		} else {
-			System.err.println("L'id " +idEmployee+ " n'est relié à aucun employé en base de données.");
-		}
+	public void onReplenishment(IAnnounce announce) throws RemoteException {
+//		System.out.println("Client side");
+//		Optional<Employee> employee = db.getById(idEmployee);
+//		if (employee.isPresent() ) {
+//			emailService.sendSimpleMessage(employee.get(), announce);
+//		} else {
+//			System.err.println("L'id " +idEmployee+ " n'est relié à aucun employé en base de données.");
+//		}
 	}
 }

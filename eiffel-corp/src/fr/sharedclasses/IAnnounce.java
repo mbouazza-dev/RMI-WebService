@@ -129,9 +129,9 @@ public interface IAnnounce extends Remote {
 	 * 
 	 * @param observer				the new observer
 	 * @throws NullPointerException	if the observer is null
-	 * @see							AnnounceObserver
+	 * @see							IAnnounceObserver
 	 */
-	void registerObserver(AnnounceObserver observer) throws RemoteException;
+	void registerObserver(IAnnounceObserver observer) throws RemoteException;
 	
 	/**
 	 * Removes from this announce one product.
@@ -147,7 +147,7 @@ public interface IAnnounce extends Remote {
 	 * @param observer					the observer to remove
 	 * @throws NullPointerException		if the observer is null
 	 * @throws IllegalStateException	if this announce do not contains the specified observer
-	 * @see								AnnounceObserver
+	 * @see								IAnnounceObserver
 	 */
-	void unregisterObserver(AnnounceObserver observer) throws RemoteException;
+	void unregisterObserver(IAnnounceObserver observer) throws RemoteException;
 }
