@@ -101,5 +101,4 @@ public class Store extends UnicastRemoteObject implements IStore {
 	public void UnregisterClientsOnReplenishment(int announceId, String mail) throws RemoteException {
 		announceObserver.unregister(announceId, mail);
 	}
-
 }

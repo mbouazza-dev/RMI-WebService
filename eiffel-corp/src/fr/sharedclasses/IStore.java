@@ -94,4 +94,20 @@ public interface IStore extends Remote {
 	 * @see					Rating
 	 */
 	void rateAnnounce(int idAnnounce, Rating rating) throws RemoteException;
+
+	/**
+	 * Register a Client on a queue for a specific announce. Only the mail's client was given.
+	 * @param announceId
+	 * @param mail
+	 * @throws RemoteException
+	 */
+	void registerClientOnQueue(int announceId, String mail) throws RemoteException;
+
+	/**
+	 * Unregister clients who wait a replenishment of a products. 
+	 * @param announceId
+	 * @param mail
+	 * @throws RemoteException
+	 */
+	void UnregisterClientsOnReplenishment(int announceId, String mail) throws RemoteException;
 }

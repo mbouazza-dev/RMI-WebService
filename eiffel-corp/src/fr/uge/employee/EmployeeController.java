@@ -119,15 +119,20 @@ public class EmployeeController {
 		if (!sessions.containsKey(session.getId())) {
 			return "redirect:/login"; // si non connecté on redirige vers la page de connexion
 		}
-		int idEmployee = sessions.get(session.getId());
-		IAnnounce announce = store.getAnnounce(idAnnounce);
-//		announce.registerObserver(new NotificationObserver(db));
-//		if (announce.notifyEmployee(idEmployee)) {
-//			redirectAttrs.addFlashAttribute("toastMessage", "Vous avez été ajouté à la file d'attente.");
-//		} else {
-//			redirectAttrs.addFlashAttribute("toastMessage", "Une erreur est survenue lors de votre ajout à la file d'attente.");
-//		}
-		redirectAttrs.addFlashAttribute("showToast", true);
+		try {
+			int idEmployee = sessions.get(session.getId());
+			Optional<Employee> oEmployee = db.getById(idEmployee);
+			if(oEmployee.isEmpty()) {
+				throw new IllegalStateException("[Database problem] employee with id " + idEmployee + " is not present on database");
+			}
+			Employee employee = oEmployee.get();
+			store.registerClientOnQueue(idAnnounce, employee.getEmail());
+			redirectAttrs.addFlashAttribute("toastMessage", "Vous avez été ajouté à la file d'attente.");
+		} catch (Exception e) {
+			redirectAttrs.addFlashAttribute("toastMessage", "Une erreur est survenue lors de votre ajout à la file d'attente.");
+		} finally {
+			redirectAttrs.addFlashAttribute("showToast", true);
+		}
 		return "redirect:/announces/{idAnnounce}";
 	}
 	
