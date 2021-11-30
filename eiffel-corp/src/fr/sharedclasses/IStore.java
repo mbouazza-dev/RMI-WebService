@@ -83,7 +83,7 @@ public interface IStore extends Remote {
 	 * @param idEmployee 	the id of the employee who buys the product
 	 * @throws RemoteException
 	 */
-	void buyProduct(int idAnnounce, int idProduct, int idEmployee) throws RemoteException;
+	boolean buyProduct(int idAnnounce, int idProduct, int idEmployee) throws RemoteException;
 	
 	/**
 	 * Adds a note to the specified announce.

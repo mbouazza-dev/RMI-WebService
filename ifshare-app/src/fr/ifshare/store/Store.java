@@ -7,17 +7,23 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import javax.xml.rpc.ServiceException;
+
 import fr.sharedclasses.IAnnounce;
 import fr.sharedclasses.IStore;
 import fr.sharedclasses.Product;
 import fr.sharedclasses.Rating;
+import fr.uge.bank.AccountManager;
+import fr.uge.bank.AccountManagerServiceLocator;
 
 public class Store extends UnicastRemoteObject implements IStore {
 	private final HashMap<Integer, Announce> announces; // <idAnnounce, Announce>
 	private final AnnounceObserver announceObserver;
+	private final AccountManager accountManager;
 
-	public Store() throws RemoteException {
+	public Store(AccountManager accountManager) throws RemoteException {
 		super();
+		this.accountManager = accountManager;
 		announces = new HashMap<>();
 		announceObserver = new AnnounceObserver();
 	}
@@ -38,11 +44,22 @@ public class Store extends UnicastRemoteObject implements IStore {
 	}
 
 	@Override
-	public void buyProduct(int idAnnounce, int idProduct, int idEmployee) throws RemoteException {
+	public boolean buyProduct(int idAnnounce, int idProduct, int idEmployee) throws RemoteException {
 		if (announces.containsKey(idAnnounce)) {
 			Announce announce = announces.get(idAnnounce);
+			Product product = announce.getProduct(idProduct);
+			System.out.println("bank : " +accountManager.amount(idEmployee));
+			System.out.println("produit : " +product.getPrice());
+			if (accountManager.amount(idEmployee) < product.getPrice()) {
+				// Vente impossible
+				return false;
+			}
 			announce.soldProduct(idProduct);
+			accountManager.withdraw(product.getPrice(), idEmployee); // on retire l'argent du compte de l'acheteur
+			accountManager.deposit(product.getPrice(), product.getIdEmployee()); // on ajoute l'argent sur le compte du vendeur
+			return true;
 		}
+		return false;
 	}
 
 	@Override

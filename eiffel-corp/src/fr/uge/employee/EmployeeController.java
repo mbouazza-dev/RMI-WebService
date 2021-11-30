@@ -122,7 +122,7 @@ public class EmployeeController {
 		try {
 			int idEmployee = sessions.get(session.getId());
 			Optional<Employee> oEmployee = db.getById(idEmployee);
-			if(oEmployee.isEmpty()) {
+			if(!oEmployee.isPresent()) {
 				throw new IllegalStateException("[Database problem] employee with id " + idEmployee + " is not present on database");
 			}
 			Employee employee = oEmployee.get();
@@ -142,11 +142,11 @@ public class EmployeeController {
 			return "redirect:/login"; // si non connecté on redirige vers la page de connexion
 		}
 		IAnnounce announce = store.getAnnounce(idAnnounce);
-		if (announce.soldProduct(idProduct)) {
+		if (store.buyProduct(idAnnounce, idProduct, sessions.get(session.getId()))) {
 			// produit vendu
 			redirectAttrs.addFlashAttribute("toastMessage", "Commande validée");
 		} else {
-			redirectAttrs.addFlashAttribute("toastMessage", "Désolé mais le produit souhaité a déjà été vendu.");
+			redirectAttrs.addFlashAttribute("toastMessage", "Achat impossible : soit le produit souhaité a déjà été vendu soit la banque a refusée la transaction.");
 		}
 		redirectAttrs.addFlashAttribute("showToast", true);
 		return "redirect:/announces/{idAnnounce}";

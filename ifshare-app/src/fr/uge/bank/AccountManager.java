@@ -8,7 +8,7 @@
 package fr.uge.bank;
 
 public interface AccountManager extends java.rmi.Remote {
-    public boolean withdraw(int amount, int id) throws java.rmi.RemoteException;
-    public void deposit(int amount, int id) throws java.rmi.RemoteException;
-    public long amount(int id) throws java.rmi.RemoteException;
+    public void deposit(float amount, int id) throws java.rmi.RemoteException;
+    public float amount(int id) throws java.rmi.RemoteException;
+    public boolean withdraw(float amount, int id) throws java.rmi.RemoteException;
 }
