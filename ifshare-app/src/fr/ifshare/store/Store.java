@@ -7,6 +7,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import javax.xml.rpc.ServiceException;
+
+import fr.converter.CurncsrvReturnRate;
+import fr.converter.CurrencyServerLocator;
+import fr.converter.CurrencyServerSoap;
 import fr.sharedclasses.IAnnounce;
 import fr.sharedclasses.IStore;
 import fr.sharedclasses.Product;
@@ -76,6 +81,24 @@ public class Store extends UnicastRemoteObject implements IStore {
 	@Override
 	public List<IAnnounce> getAnnounces() throws RemoteException {
 		return announces.values().stream().collect(Collectors.toList());
+	}
+
+	@Override
+	public double convertPrice(String fromCurrency, String toCurrency) throws RemoteException {
+		CurrencyServerSoap converter;
+		Double minprice = null;
+		try {
+			converter = new CurrencyServerLocator().getCurrencyServerSoap();
+			for (IAnnounce anc : getAnnounces()) {
+				for (Product pdt : anc.getProducts()) {
+					pdt.setPrice((double) converter.convert("", fromCurrency, toCurrency, pdt.getPrice(), true, "", CurncsrvReturnRate.curncsrvReturnRateNumber, "", ""));
+					minprice = anc.getMinPrice();
+				}
+			}
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return minprice;
 	}
 
 }

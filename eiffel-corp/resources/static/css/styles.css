@@ -3563,6 +3563,8 @@ textarea.form-control-lg {
   font-size: 1rem;
   color: #212529;
   text-align: left;
+  overflow-y: auto;
+  max-height: 280px;
   list-style: none;
   background-color: #fff;
   background-clip: padding-box;
@@ -5756,6 +5758,15 @@ textarea.form-control-lg {
     border-radius: 0;
   }
 }
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
 .tooltip {
   position: absolute;
   z-index: 1080;

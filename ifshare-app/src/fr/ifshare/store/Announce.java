@@ -11,6 +11,14 @@ import java.util.Objects;
 import java.util.Queue;
 import java.util.stream.Collectors;
 
+import javax.xml.rpc.ServiceException;
+
+import org.apache.axis.AxisFault;
+
+import fr.converter.CurncsrvReturnRate;
+import fr.converter.CurrencyServerLocator;
+import fr.converter.CurrencyServerSoap;
+import fr.converter.CurrencyServerSoapStub;
 import fr.sharedclasses.AnnounceObserver;
 import fr.sharedclasses.IAnnounce;
 import fr.sharedclasses.Product;
@@ -111,8 +119,8 @@ public class Announce extends UnicastRemoteObject implements IAnnounce {
 	}
 	
 	@Override
-	public float getMinPrice() throws RemoteException {
-		return products.values().stream().map(p -> p.getPrice()).min(Float::compare).orElse(-1.f);
+	public double getMinPrice() throws RemoteException {
+		return products.values().stream().map(p -> p.getPrice()).min(Double::compare).orElse(-1.d);
 	}
 	
 	// Private methods

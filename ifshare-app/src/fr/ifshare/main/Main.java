@@ -3,11 +3,11 @@ package fr.ifshare.main;
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 import java.util.Arrays;
+import java.util.Iterator;
 
-import com.currencysystem.webservices.currencyserver.CurncsrvReturnRate;
-import com.currencysystem.webservices.currencyserver.CurrencyServerLocator;
-import com.currencysystem.webservices.currencyserver.CurrencyServerSoap;
-
+import fr.converter.CurncsrvReturnRate;
+import fr.converter.CurrencyServerLocator;
+import fr.converter.CurrencyServerSoap;
 import fr.ifshare.store.Announce;
 import fr.ifshare.store.NotificationReplenishmentObserver;
 import fr.ifshare.store.Store;
@@ -45,7 +45,7 @@ public class Main {
 			
 			// Exemple d'utilisation du service de conversion de devise
 			CurrencyServerSoap toto = new CurrencyServerLocator().getCurrencyServerSoap();
-			System.out.println(toto.convert("", "EUR", "USD", 1, true, "", CurncsrvReturnRate.curncsrvReturnRateNumber, "", ""));
+			System.out.println(toto.convert("", "EUR", "USD", 1, false, "", CurncsrvReturnRate.curncsrvReturnRateNumber, "", ""));
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

@@ -73,7 +73,7 @@ public interface IAnnounce extends Remote {
 	 * 
 	 * @return	the minimum price
 	 */
-	float getMinPrice() throws RemoteException;
+	double getMinPrice() throws RemoteException;
 	
 	/**
 	 * Returns the product with the specified id of this announce.

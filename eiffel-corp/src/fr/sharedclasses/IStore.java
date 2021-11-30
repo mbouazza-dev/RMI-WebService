@@ -94,4 +94,7 @@ public interface IStore extends Remote {
 	 * @see					Rating
 	 */
 	void rateAnnounce(int idAnnounce, Rating rating) throws RemoteException;
+	
+	public double convertPrice(String fromCurrency, String toCurrency) throws RemoteException;
+
 }

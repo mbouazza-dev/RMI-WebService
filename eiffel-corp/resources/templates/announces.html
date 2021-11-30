@@ -17,20 +17,132 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">Shop</a>
+                <a class="navbar-brand" href="home">Shop</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="home">Home</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">All Products</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="announces">Announces</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Currency's
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='AED')}">AED</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='AFN')}">AFN</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='ALL')}">ALL</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='AOA')}">AOA</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='ARS')}">ARS</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='AUD')}">AUD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='AZN')}">AZN</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='BBD')}">BBD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='BDT')}">BDT</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='BGN')}">BGN</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='BHD')}">BHD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='BND')}">BND</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='BOB')}">BOB</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='BRL')}">BRL</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='BSD')}">BSD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='BWP')}">BWP</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='BYN')}">BYN</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='BZD')}">BZD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='CAD')}">CAD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='CDF')}">CDF</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='CHF')}">CHF</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='CLP')}">CLP</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='CNY')}">CNY</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='COP')}">COP</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='CRC')}">CRC</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='CVE')}">CVE</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='CZK')}">CZK</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='DKK')}">DKK</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='DOP')}">DOP</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='DZD')}">DZD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='EGP')}">EGP</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='ERN')}">ERN</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='ETB')}">ETB</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='EUR')}">EUR</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='FJD')}">FJD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='GBP')}">GBP</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='GHS')}">GHS</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='GTQ')}">GTQ</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='HKD')}">HKD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='HNL')}">HNL</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='HRK')}">HRK</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='HTG')}">HTG</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='HUF')}">HUF</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='IDR')}">IDR</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='ILS')}">ILS</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='INR')}">INR</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='IQD')}">IQD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='ISK')}">ISK</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='JMD')}">JMD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='JOD')}">JOD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='JPY')}">JPY</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='KES')}">KES</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='KHR')}">KHR</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='KMF')}">KMF</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='KRW')}">KRW</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='KWD')}">KWD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='KZT')}">KZT</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='LBP')}">LBP</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='LKR')}">LKR</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='LYD')}">LYD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='MAD')}">MAD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='MDL')}">MDL</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='MKD')}">MKD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='MMK')}">MMK</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='MOP')}">MOP</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='MRU')}">MRU</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='MUR')}">MUR</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='MXN')}">MXN</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='MYR')}">MYR</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='MZN')}">MZN</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='NAD')}">NAD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='NGN')}">NGN</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='NIO')}">NIO</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='NOK')}">NOK</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='NPR')}">NPR</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='NZD')}">NZD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='OMR')}">OMR</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='PAB')}">PAB</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='PEN')}">PEN</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='PGK')}">PGK</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='PHP')}">PHP</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='PKR')}">PKR</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='PLN')}">PLN</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='PYG')}">PYG</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='QAR')}">QAR</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='RON')}">RON</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='RSD')}">RSD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='RUB')}">RUB</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='SAR')}">SAR</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='SEK')}">SEK</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='SGD')}">SGD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='SRD')}">SRD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='THB')}">THB</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='TMT')}">TMT</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='TND')}">TND</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='TRY')}">TRY</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='TTD')}">TTD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='TWD')}">TWD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='TZS')}">TZS</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='UAH')}">UAH</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='UGX')}">UGX</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='USD')}">USD</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='UYU')}">UYU</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='UZS')}">UZS</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='VND')}">VND</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='XAF')}">XAF</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='XDR')}">XDR</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='XOF')}">XOF</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='XPF')}">XPF</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='YER')}">YER</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='ZAR')}">ZAR</a></li>
+            <li><a class="dropdown-item" th:href="@{/announces/changeCurrency/{currencyName}(currencyName='ZMW')}">ZMW</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
                 </div>
             </div>
         </nav>
@@ -58,7 +170,7 @@
                                     <h3 class="fw-bolder" th:text="${announce.getLabel()}"></h3>
                                     <p></p>
                                     <h6 class="fw-bolder" th:text="${announce.getDescription()}"></h6>
-                                    <span class="text-muted" th:text="${announce.getMinPrice()}+€"></span>
+                                    <span class="text-muted" th:text="'Price: '+${announce.getMinPrice()}+' '+${currency}"></span>
                                     <!-- Product price-->
                                 </div>
                             </div>

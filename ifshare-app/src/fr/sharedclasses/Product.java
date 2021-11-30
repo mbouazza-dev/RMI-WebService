@@ -30,7 +30,7 @@ public class Product implements Serializable {
 	private int id;
 	private String label;
 	private int idEmployee;
-	private float price;
+	private double price;
 	private State state;
 	
 	public Product() {
@@ -57,7 +57,7 @@ public class Product implements Serializable {
 		return idEmployee;
 	}
 	
-	public float getPrice() {
+	public double getPrice() {
 		return price;
 	}
 	
@@ -77,7 +77,7 @@ public class Product implements Serializable {
 		this.idEmployee = idEmployee;
 	}
 	
-	public void setPrice(float price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 	

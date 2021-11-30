@@ -43,7 +43,7 @@
 							<td th:text="${product.label}"></td>
 							<td th:text="${product.state}"></td>
 							<td th:text="${product.idEmployee}"></td>
-							<td><span th:text="${product.price}" /> €</td>
+							<td><span th:text="${product.price}"/></td>
 							<td><a th:href="@{/announces/{idAnnounce}/{idProduct}/(idAnnounce=${announce.getId()}, idProduct=${product.id})}">Acheter</a></td>
 						</tr>
 					</tbody>

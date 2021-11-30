@@ -32,6 +32,8 @@ public class EmployeeController {
 	private final Map<String, Integer> sessions = new HashMap<>(); // <sessionId, idEmployee>
 	@Autowired
 	private EmployeesDB db;
+	private String currency = "EUR";
+	private String toCurrency = "EUR";
 	
 	
 	public EmployeeController(IStore store) {
@@ -87,7 +89,20 @@ public class EmployeeController {
 			return "redirect:/login"; // si non connecté on redirige vers la page de connexion
 		}
 		model.addAttribute("announces", store.getAnnounces());
+		model.addAttribute("currency", toCurrency);
+		store.convertPrice(currency, toCurrency);
+		currency=toCurrency;
 		return "announces";
+	}
+	
+	@GetMapping("/announces/changeCurrency/{currencyName}")
+	public String onSenFout(@PathVariable String currencyName, RedirectAttributes redirectAttrs, HttpSession session) throws RemoteException {
+		if (!sessions.containsKey(session.getId())) {
+			return "redirect:/login"; // si non connecté on redirige vers la page de connexion
+		}
+		redirectAttrs.addFlashAttribute("currency",currencyName);
+		toCurrency = currencyName;
+		return "redirect:/announces";
 	}
 	
 	/**
