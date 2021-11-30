@@ -20,6 +20,8 @@ import fr.sharedclasses.IAnnounce;
 public class AnnounceObserver extends UnicastRemoteObject implements IAnnounceObserver {
 	
 	private HashMap<Integer, Queue<String>> map = new HashMap<Integer, Queue<String>>(); 
+	private EmailService emailService = new EmailService();
+	
 	
 	public AnnounceObserver() throws RemoteException {
 		super();
@@ -59,7 +61,9 @@ public class AnnounceObserver extends UnicastRemoteObject implements IAnnounceOb
 		}
 		Queue<String> queue = map.get(announce.getId());
 		for(String mail: queue) {
-			System.out.println(mail + ":> L'announce " + announce.getLabel() + " a de nouveaux produits disponibles." );
+			String content = mail + ":> L'announce " + announce.getLabel() + " a de nouveaux produits disponibles." ;
+			System.out.println(content);
+			emailService.sendEmail(content, mail);
 		}
 		queue.clear();
 	}
