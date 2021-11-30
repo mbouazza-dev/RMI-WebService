@@ -83,7 +83,7 @@ public interface IStore extends Remote {
 	 * @param idEmployee 	the id of the employee who buys the product
 	 * @throws RemoteException
 	 */
-	void buyProduct(int idAnnounce, int idProduct, int idEmployee) throws RemoteException;
+	boolean buyProduct(int idAnnounce, int idProduct, int idEmployee) throws RemoteException;
 	
 	/**
 	 * Adds a note to the specified announce.
@@ -97,4 +97,19 @@ public interface IStore extends Remote {
 	
 	public double convertPrice(String fromCurrency, String toCurrency) throws RemoteException;
 
+	/**
+	 * Register a Client on a queue for a specific announce. Only the mail's client was given.
+	 * @param announceId
+	 * @param mail
+	 * @throws RemoteException
+	 */
+	void registerClientOnQueue(int announceId, String mail) throws RemoteException;
+
+	/**
+	 * Unregister clients who wait a replenishment of a products. 
+	 * @param announceId
+	 * @param mail
+	 * @throws RemoteException
+	 */
+	void UnregisterClientsOnReplenishment(int announceId, String mail) throws RemoteException;
 }

@@ -16,13 +16,19 @@ import fr.sharedclasses.IAnnounce;
 import fr.sharedclasses.IStore;
 import fr.sharedclasses.Product;
 import fr.sharedclasses.Rating;
+import fr.uge.bank.AccountManager;
+import fr.uge.bank.AccountManagerServiceLocator;
 
 public class Store extends UnicastRemoteObject implements IStore {
 	private final HashMap<Integer, Announce> announces; // <idAnnounce, Announce>
+	private final AnnounceObserver announceObserver;
+	private final AccountManager accountManager;
 
-	public Store() throws RemoteException {
+	public Store(AccountManager accountManager) throws RemoteException {
 		super();
+		this.accountManager = accountManager;
 		announces = new HashMap<>();
+		announceObserver = new AnnounceObserver();
 	}
 	
 	public void addAnnounce(Announce announce) throws RemoteException {
@@ -41,11 +47,22 @@ public class Store extends UnicastRemoteObject implements IStore {
 	}
 
 	@Override
-	public void buyProduct(int idAnnounce, int idProduct, int idEmployee) throws RemoteException {
+	public boolean buyProduct(int idAnnounce, int idProduct, int idEmployee) throws RemoteException {
 		if (announces.containsKey(idAnnounce)) {
 			Announce announce = announces.get(idAnnounce);
+			Product product = announce.getProduct(idProduct);
+			System.out.println("bank : " +accountManager.amount(idEmployee));
+			System.out.println("produit : " +product.getPrice());
+			if (accountManager.amount(idEmployee) < product.getPrice()) {
+				// Vente impossible
+				return false;
+			}
 			announce.soldProduct(idProduct);
+			accountManager.withdraw(product.getPrice(), idEmployee); // on retire l'argent du compte de l'acheteur
+			accountManager.deposit(product.getPrice(), product.getIdEmployee()); // on ajoute l'argent sur le compte du vendeur
+			return true;
 		}
+		return false;
 	}
 
 	@Override
@@ -69,7 +86,12 @@ public class Store extends UnicastRemoteObject implements IStore {
 		if (announces.containsKey(idAnnounce)) {
 			Announce announce = announces.get(idAnnounce);
 			product.setId(announce.getMaxIdProduct() + 1);
+			if(announce.empty() && announceObserver.containsWaiters(idAnnounce)) {
+				announceObserver.onReplenishment(announce);
+			}
 			announce.addProduct(product);
+		}  else {
+			throw new IllegalStateException("The announce with id " + idAnnounce + " does not exists");
 		}
 	}
 
@@ -100,5 +122,21 @@ public class Store extends UnicastRemoteObject implements IStore {
 		}
 		return minprice;
 	}
-
+	
+	@Override
+	public void registerClientOnQueue(int announceId, String mail) throws RemoteException{
+		Announce announce = announces.get(announceId);
+		if(announce == null) {
+			throw new IllegalStateException("this announce with id " + announceId + " does not exist.");
+		}
+		if(!announce.empty()) {
+			throw new IllegalStateException("this announce with id " + announceId + " still contains products.");
+		}
+		announceObserver.register(announceId, mail);
+	}
+	
+	@Override
+	public void UnregisterClientsOnReplenishment(int announceId, String mail) throws RemoteException {
+		announceObserver.unregister(announceId, mail);
+	}
 }

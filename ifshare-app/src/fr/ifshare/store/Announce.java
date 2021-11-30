@@ -19,7 +19,7 @@ import fr.converter.CurncsrvReturnRate;
 import fr.converter.CurrencyServerLocator;
 import fr.converter.CurrencyServerSoap;
 import fr.converter.CurrencyServerSoapStub;
-import fr.sharedclasses.AnnounceObserver;
+import fr.sharedclasses.IAnnounceObserver;
 import fr.sharedclasses.IAnnounce;
 import fr.sharedclasses.Product;
 import fr.sharedclasses.Rating;
@@ -35,8 +35,6 @@ public class Announce extends UnicastRemoteObject implements IAnnounce {
 	private final String description;
 	private final String category;
 	private final Map<Integer, Product> products; // <idProduct, Product>
-	private final List<AnnounceObserver> observers;
-	private final Queue<Integer> queue = new ArrayDeque<>();
 	
 	
 	public Announce(String label, String description, Product firstProduct, List<String> tags, String category) throws RemoteException {
@@ -49,10 +47,9 @@ public class Announce extends UnicastRemoteObject implements IAnnounce {
 		this.products = new HashMap<>();
 		this.products.put(firstProduct.getId(), firstProduct);
 		this.category = category;
-		this.observers = new ArrayList<>();
 	}
 	
-	public Announce(String label, String description, Product firstProduct, List<String> tags, String category, AnnounceObserver observer) throws RemoteException {
+	public Announce(String label, String description, Product firstProduct, List<String> tags, String category, IAnnounceObserver observer) throws RemoteException {
 		super();
 		id = SERIAL_ID++;
 		this.label = Objects.requireNonNull(label);
@@ -62,8 +59,6 @@ public class Announce extends UnicastRemoteObject implements IAnnounce {
 		products = new HashMap<>();
 		products.put(firstProduct.getId(), firstProduct);
 		this.category = category;
-		observers = new ArrayList<>();
-		observers.add(observer);
 	}
 	
 	// Getters
@@ -124,24 +119,16 @@ public class Announce extends UnicastRemoteObject implements IAnnounce {
 	}
 	
 	// Private methods
-	
-	private void notifyReplenishment() throws RemoteException {
-		Integer idEmployee = queue.poll();
-		if (idEmployee == null) {
-			return; // Il n'y a personne à notifier
-		}
-		for (AnnounceObserver observer : observers) {
-			observer.onReplenishment(this, idEmployee);
-		}
-	}
+
 	
 	// Public methods
 	
+	public boolean empty() {
+		return products.isEmpty();
+	}
+	
 	@Override
 	public void addProduct(Product product) throws RemoteException {
-		if (products.size() == 0) {
-			notifyReplenishment();
-		}
 		if (!products.containsKey(product.getId())) {
 			products.put(product.getId(), product);
 		}
@@ -157,31 +144,12 @@ public class Announce extends UnicastRemoteObject implements IAnnounce {
 		return products.keySet().stream().max(Integer::compareTo).orElse(0);
 	}
 	
-	@Override
-	public boolean notifyEmployee(int idEmployee) throws RemoteException {
-		if (products.size() == 0) {
-			queue.offer(idEmployee);
-			return true;
-		}
-		return false;
-	}
 	
 	@Override
 	public boolean soldProduct(int idProduct) throws RemoteException {
 		return products.remove(idProduct) != null;
 	}
 	
-	@Override
-	public void registerObserver(AnnounceObserver observer) throws RemoteException {
-		observers.add(Objects.requireNonNull(observer));
-	}
-	
-	@Override
-	public void unregisterObserver(AnnounceObserver observer) throws RemoteException {
-		if (!observers.remove(Objects.requireNonNull(observer))) {
-			throw new IllegalStateException();
-		}
-	}
 	
 	@Override
 	public String toString() {

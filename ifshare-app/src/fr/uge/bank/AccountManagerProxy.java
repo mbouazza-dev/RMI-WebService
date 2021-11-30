@@ -44,19 +44,19 @@ public class AccountManagerProxy implements fr.uge.bank.AccountManager {
     return accountManager;
   }
   
-  public boolean withdraw(int amount, int id) throws java.rmi.RemoteException{
-    if (accountManager == null)
-      _initAccountManagerProxy();
-    return accountManager.withdraw(amount, id);
-  }
-  
-  public void deposit(int amount, int id) throws java.rmi.RemoteException{
+  public void deposit(double amount, int id) throws java.rmi.RemoteException{
     if (accountManager == null)
       _initAccountManagerProxy();
     accountManager.deposit(amount, id);
   }
   
-  public long amount(int id) throws java.rmi.RemoteException{
+  public boolean withdraw(double amount, int id) throws java.rmi.RemoteException{
+    if (accountManager == null)
+      _initAccountManagerProxy();
+    return accountManager.withdraw(amount, id);
+  }
+  
+  public float amount(int id) throws java.rmi.RemoteException{
     if (accountManager == null)
       _initAccountManagerProxy();
     return accountManager.amount(id);
