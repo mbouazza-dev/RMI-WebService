@@ -97,7 +97,6 @@ public interface IStore extends Remote {
 	
 	public double convertPrice(String fromCurrency, String toCurrency) throws RemoteException;
 
-
 	/**
 	 * Register a Client on a queue for a specific announce. Only the mail's client was given.
 	 * @param announceId

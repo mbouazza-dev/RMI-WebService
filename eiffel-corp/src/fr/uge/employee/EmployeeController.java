@@ -23,7 +23,6 @@ import fr.sharedclasses.IAnnounce;
 import fr.sharedclasses.IStore;
 import fr.sharedclasses.Product;
 import fr.sharedclasses.Rating;
-import fr.uge.utils.NotificationObserver;
 import fr.uge.utils.PasswordValidator;
 
 @Controller

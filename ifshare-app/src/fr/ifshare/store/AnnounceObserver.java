@@ -11,10 +11,10 @@ import fr.sharedclasses.IAnnounceObserver;
 import fr.sharedclasses.IAnnounce;
 
 /**
- * Classe implementing Observer pattern to allow notification on client.
- * Waitting client was notified when a product is available again if they are registered on its queue.
+ * Class implementing Observer pattern to allow notification on client.
+ * Waiting client was notified when a product is available again if they are registered on its queue.
  * 
- * This class owns a Hashmap<Announce ID, List<Client Mail>> to retrieve the list of waiters client for 
+ * This class owns a HashMap<Announce ID, List<Client Mail>> to retrieve the list of waiters client for 
  * a given announce.
  */
 public class AnnounceObserver extends UnicastRemoteObject implements IAnnounceObserver {

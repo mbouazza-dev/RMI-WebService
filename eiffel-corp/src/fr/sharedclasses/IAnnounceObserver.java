@@ -14,4 +14,14 @@ public interface IAnnounceObserver extends Remote {
 	 * @see						IAnnounce
 	 */
 	void onReplenishment(IAnnounce announce) throws RemoteException;
+
+	/**
+	 * 
+	 * @param announceId        the announce id;
+	 * @param mail              the mail of the employee for the email sended.
+	 * @throws RemoteException                     
+	 */
+	void register(int announceId, String mail) throws RemoteException;
+
+	void unregister(int announceId, String mail) throws RemoteException;
 }

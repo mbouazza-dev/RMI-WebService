@@ -6,8 +6,8 @@ import java.util.Objects;
 public class Product implements Serializable {
 	
 	public enum State { 
-		NEW("Nouveau"), 
-		ALMOST_NEW("Presque nouveau"), 
+		NEW("Neuf"), 
+		ALMOST_NEW("Presque neuf"), 
 		USED("Usé"), 
 		BROKEN("Cassé");
 		
