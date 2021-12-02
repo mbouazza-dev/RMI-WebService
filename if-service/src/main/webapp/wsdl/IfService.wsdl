@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://ifshare.fr" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://ifshare.fr" xmlns:intf="http://ifshare.fr" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://ifshare.fr" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="buyBasket">
+    <complexType/>
+   </element>
+   <element name="buyBasketResponse">
+    <complexType>
+     <sequence>
+      <element name="buyBasketReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getMinPrice">
+    <complexType>
+     <sequence>
+      <element name="idAnnounce" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getMinPriceResponse">
+    <complexType>
+     <sequence>
+      <element name="getMinPriceReturn" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getProductPrice">
+    <complexType>
+     <sequence>
+      <element name="idAnnounce" type="xsd:int"/>
+      <element name="idProduct" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getProductPriceResponse">
+    <complexType>
+     <sequence>
+      <element name="getProductPriceReturn" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addProductToBasket">
+    <complexType>
+     <sequence>
+      <element name="idAnnounce" type="xsd:int"/>
+      <element name="idProduct" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addProductToBasketResponse">
+    <complexType>
+     <sequence>
+      <element name="addProductToBasketReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeProductFromBasket">
+    <complexType>
+     <sequence>
+      <element name="idProduct" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeProductFromBasketResponse">
+    <complexType>
+     <sequence>
+      <element name="removeProductFromBasketReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="isAvailable">
+    <complexType>
+     <sequence>
+      <element name="idAnnounce" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="isAvailableResponse">
+    <complexType>
+     <sequence>
+      <element name="isAvailableReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getMinPriceResponse">
+
+      <wsdl:part element="impl:getMinPriceResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addProductToBasketRequest">
+
+      <wsdl:part element="impl:addProductToBasket" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeProductFromBasketRequest">
+
+      <wsdl:part element="impl:removeProductFromBasket" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getProductPriceResponse">
+
+      <wsdl:part element="impl:getProductPriceResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="buyBasketRequest">
+
+      <wsdl:part element="impl:buyBasket" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="isAvailableRequest">
+
+      <wsdl:part element="impl:isAvailable" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="buyBasketResponse">
+
+      <wsdl:part element="impl:buyBasketResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getMinPriceRequest">
+
+      <wsdl:part element="impl:getMinPrice" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addProductToBasketResponse">
+
+      <wsdl:part element="impl:addProductToBasketResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getProductPriceRequest">
+
+      <wsdl:part element="impl:getProductPrice" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeProductFromBasketResponse">
+
+      <wsdl:part element="impl:removeProductFromBasketResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="isAvailableResponse">
+
+      <wsdl:part element="impl:isAvailableResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="IfService">
+
+      <wsdl:operation name="buyBasket">
+
+         <wsdl:input message="impl:buyBasketRequest" name="buyBasketRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:buyBasketResponse" name="buyBasketResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getMinPrice">
+
+         <wsdl:input message="impl:getMinPriceRequest" name="getMinPriceRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getMinPriceResponse" name="getMinPriceResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getProductPrice">
+
+         <wsdl:input message="impl:getProductPriceRequest" name="getProductPriceRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getProductPriceResponse" name="getProductPriceResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addProductToBasket">
+
+         <wsdl:input message="impl:addProductToBasketRequest" name="addProductToBasketRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addProductToBasketResponse" name="addProductToBasketResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeProductFromBasket">
+
+         <wsdl:input message="impl:removeProductFromBasketRequest" name="removeProductFromBasketRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:removeProductFromBasketResponse" name="removeProductFromBasketResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isAvailable">
+
+         <wsdl:input message="impl:isAvailableRequest" name="isAvailableRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:isAvailableResponse" name="isAvailableResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="IfServiceSoapBinding" type="impl:IfService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="buyBasket">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="buyBasketRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="buyBasketResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getMinPrice">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getMinPriceRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getMinPriceResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getProductPrice">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getProductPriceRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getProductPriceResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addProductToBasket">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addProductToBasketRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addProductToBasketResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeProductFromBasket">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeProductFromBasketRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeProductFromBasketResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isAvailable">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="isAvailableRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="isAvailableResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="IfServiceService">
+
+      <wsdl:port binding="impl:IfServiceSoapBinding" name="IfService">
+
+         <wsdlsoap:address location="http://localhost:8080/if-service/services/IfService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

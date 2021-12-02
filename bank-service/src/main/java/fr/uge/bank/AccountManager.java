@@ -12,6 +12,7 @@ public class AccountManager {
         accounts.put(2, 10.f);
         accounts.put(3, 2_663_884.f);
         accounts.put(4, 10_000.f);
+        accounts.put(99, 1000.f); // for if-service demonstration
     }
 
     public boolean withdraw(float amount, int id) {
