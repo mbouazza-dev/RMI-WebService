@@ -37,7 +37,7 @@ RMI-WebService is organized through differents J2E applications, RMI architectur
 
 ### Eiffel-Corp 
 
-Eiffel Corp is a Client application allowing employees to access company services including IfShare App.
+Eiffel Corp is a Java application allowing employees to access company services including IfShare App.
 It write with Spring framework and use Java RMI architecture to access IfShare-app features like the store and the mail notifier. 
 
 Eiffel Corp use Thymeleaf and Spring to give a Web User Interface in order to sell and buy products. Employees must enter their username and password to access Eiffel Corp, Also, when a product is no longer on sale, it is possible to register in order to receive a notification during the restock.
