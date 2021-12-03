@@ -19,6 +19,7 @@
 		<module>eiffel-corp</module>
 		<module>ifshare-app</module>
 		<module>bank-service</module>
+		<module>if-service</module>
 	</modules>
 
 	<properties>
