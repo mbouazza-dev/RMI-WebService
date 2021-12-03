@@ -4,16 +4,6 @@
 Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://ifshare.fr" xmlns="http://www.w3.org/2001/XMLSchema">
-   <element name="buyBasket">
-    <complexType/>
-   </element>
-   <element name="buyBasketResponse">
-    <complexType>
-     <sequence>
-      <element name="buyBasketReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
    <element name="getMinPrice">
     <complexType>
      <sequence>
@@ -72,6 +62,26 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
+   <element name="buyBasket">
+    <complexType/>
+   </element>
+   <element name="buyBasketResponse">
+    <complexType>
+     <sequence>
+      <element name="buyBasketReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getBasket">
+    <complexType/>
+   </element>
+   <element name="getBasketResponse">
+    <complexType>
+     <sequence>
+      <element name="getBasketReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
    <element name="isAvailable">
     <complexType>
      <sequence>
@@ -89,17 +99,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
   </schema>
  </wsdl:types>
 
-   <wsdl:message name="getMinPriceResponse">
+   <wsdl:message name="getBasketResponse">
 
-      <wsdl:part element="impl:getMinPriceResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="addProductToBasketRequest">
-
-      <wsdl:part element="impl:addProductToBasket" name="parameters">
+      <wsdl:part element="impl:getBasketResponse" name="parameters">
 
       </wsdl:part>
 
@@ -113,14 +115,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="getProductPriceResponse">
-
-      <wsdl:part element="impl:getProductPriceResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
    <wsdl:message name="buyBasketRequest">
 
       <wsdl:part element="impl:buyBasket" name="parameters">
@@ -129,9 +123,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="isAvailableRequest">
+   <wsdl:message name="getBasketRequest">
 
-      <wsdl:part element="impl:isAvailable" name="parameters">
+      <wsdl:part element="impl:getBasket" name="parameters">
 
       </wsdl:part>
 
@@ -161,17 +155,49 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="getProductPriceRequest">
+   <wsdl:message name="removeProductFromBasketResponse">
 
-      <wsdl:part element="impl:getProductPrice" name="parameters">
+      <wsdl:part element="impl:removeProductFromBasketResponse" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="removeProductFromBasketResponse">
+   <wsdl:message name="getMinPriceResponse">
 
-      <wsdl:part element="impl:removeProductFromBasketResponse" name="parameters">
+      <wsdl:part element="impl:getMinPriceResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addProductToBasketRequest">
+
+      <wsdl:part element="impl:addProductToBasket" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getProductPriceResponse">
+
+      <wsdl:part element="impl:getProductPriceResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="isAvailableRequest">
+
+      <wsdl:part element="impl:isAvailable" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getProductPriceRequest">
+
+      <wsdl:part element="impl:getProductPrice" name="parameters">
 
       </wsdl:part>
 
@@ -186,18 +212,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    </wsdl:message>
 
    <wsdl:portType name="IfService">
-
-      <wsdl:operation name="buyBasket">
-
-         <wsdl:input message="impl:buyBasketRequest" name="buyBasketRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:buyBasketResponse" name="buyBasketResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
 
       <wsdl:operation name="getMinPrice">
 
@@ -247,6 +261,30 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="buyBasket">
+
+         <wsdl:input message="impl:buyBasketRequest" name="buyBasketRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:buyBasketResponse" name="buyBasketResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getBasket">
+
+         <wsdl:input message="impl:getBasketRequest" name="getBasketRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getBasketResponse" name="getBasketResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
       <wsdl:operation name="isAvailable">
 
          <wsdl:input message="impl:isAvailableRequest" name="isAvailableRequest">
@@ -264,24 +302,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:binding name="IfServiceSoapBinding" type="impl:IfService">
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-
-      <wsdl:operation name="buyBasket">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="buyBasketRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="buyBasketResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
 
       <wsdl:operation name="getMinPrice">
 
@@ -348,6 +368,42 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="removeProductFromBasketResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="buyBasket">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="buyBasketRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="buyBasketResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getBasket">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getBasketRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getBasketResponse">
 
             <wsdlsoap:body use="literal"/>
 

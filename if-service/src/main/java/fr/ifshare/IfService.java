@@ -5,7 +5,10 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import fr.sharedclasses.IAnnounce;
 import fr.sharedclasses.IStore;
@@ -13,11 +16,10 @@ import fr.sharedclasses.Product;
 
 public class IfService {
 	private final IStore store;
-	private final List<BasketItem> basket;
+	private final List<BasketItem> basket = new ArrayList<>();;
 	
 	public IfService() throws MalformedURLException, RemoteException, NotBoundException {
 		this.store = (IStore) Naming.lookup("storeService");
-		this.basket = new ArrayList<>(); 
 	}
 	
 	/**
@@ -63,8 +65,7 @@ public class IfService {
 		if (product == null) {
 			return false;
 		}
-		basket.add(new BasketItem(idAnnounce, product));
-		return true;
+		return basket.add(new BasketItem(idAnnounce, product));
 	}
 	
 	public boolean removeProductFromBasket(int idProduct) {
@@ -81,15 +82,14 @@ public class IfService {
 		return basket.remove(itemToRemove);
 	}
 	
-//	public Product[] getBasket() {
-//		Product[] result = new Product[basket.size()];
-//		basket.toArray(result);
-////		int index = 0;
-////		for (int i=0; i<basket.size(); i++) {
-////			result[i] = basket.get(i).getProduct();
-////		}
-//		return result;
-//	}
+	public String getBasket() {
+		StringBuilder bld = new StringBuilder();
+		for (BasketItem p : basket) {
+			bld.append(p.getProduct().getLabel());
+			bld.append(";");
+		}
+		return bld.toString();
+	}
 	
 	public String buyBasket() throws RemoteException {
 		String result = "Les produits suivants ont été achetés : \n";

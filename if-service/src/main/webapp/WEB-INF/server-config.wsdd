@@ -7,8 +7,8 @@
   <ns1:parameter name="dotNetSoapEncFix" value="true"/>
   <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
   <ns1:parameter name="sendXMLDeclaration" value="true"/>
-  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:requestFlow>
    <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
     <ns1:parameter name="scope" value="session"/>
@@ -33,31 +33,32 @@
   <ns1:parameter name="className" value="org.apache.axis.Version"/>
  </ns1:service>
  <ns1:service name="IfService" provider="java:RPC" style="wrapped" use="literal">
-  <ns2:operation name="buyBasket" qname="ns1:buyBasket" returnQName="ns1:buyBasketReturn" returnType="xsd:string" soapAction="" xmlns:ns1="http://ifshare.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/"/>
-  <ns1:operation name="getMinPrice" qname="ns2:getMinPrice" returnQName="ns2:getMinPriceReturn" returnType="xsd:double" soapAction="" xmlns:ns2="http://ifshare.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ns2:operation name="getMinPrice" qname="ns1:getMinPrice" returnQName="ns1:getMinPriceReturn" returnType="xsd:double" soapAction="" xmlns:ns1="http://ifshare.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns2:parameter qname="ns1:idAnnounce" type="xsd:int"/>
+  </ns2:operation>
+  <ns1:operation name="getProductPrice" qname="ns2:getProductPrice" returnQName="ns2:getProductPriceReturn" returnType="xsd:double" soapAction="" xmlns:ns2="http://ifshare.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns2:idAnnounce" type="xsd:int"/>
+   <ns1:parameter qname="ns2:idProduct" type="xsd:int"/>
   </ns1:operation>
-  <ns1:operation name="getProductPrice" qname="ns3:getProductPrice" returnQName="ns3:getProductPriceReturn" returnType="xsd:double" soapAction="" xmlns:ns3="http://ifshare.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ns1:operation name="addProductToBasket" qname="ns3:addProductToBasket" returnQName="ns3:addProductToBasketReturn" returnType="xsd:boolean" soapAction="" xmlns:ns3="http://ifshare.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns3:idAnnounce" type="xsd:int"/>
    <ns1:parameter qname="ns3:idProduct" type="xsd:int"/>
   </ns1:operation>
-  <ns1:operation name="addProductToBasket" qname="ns4:addProductToBasket" returnQName="ns4:addProductToBasketReturn" returnType="xsd:boolean" soapAction="" xmlns:ns4="http://ifshare.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns4:idAnnounce" type="xsd:int"/>
+  <ns1:operation name="removeProductFromBasket" qname="ns4:removeProductFromBasket" returnQName="ns4:removeProductFromBasketReturn" returnType="xsd:boolean" soapAction="" xmlns:ns4="http://ifshare.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns4:idProduct" type="xsd:int"/>
   </ns1:operation>
-  <ns1:operation name="removeProductFromBasket" qname="ns5:removeProductFromBasket" returnQName="ns5:removeProductFromBasketReturn" returnType="xsd:boolean" soapAction="" xmlns:ns5="http://ifshare.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns5:idProduct" type="xsd:int"/>
+  <ns1:operation name="buyBasket" qname="ns5:buyBasket" returnQName="ns5:buyBasketReturn" returnType="xsd:string" soapAction="" xmlns:ns5="http://ifshare.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="getBasket" qname="ns6:getBasket" returnQName="ns6:getBasketReturn" returnType="xsd:string" soapAction="" xmlns:ns6="http://ifshare.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="isAvailable" qname="ns7:isAvailable" returnQName="ns7:isAvailableReturn" returnType="xsd:boolean" soapAction="" xmlns:ns7="http://ifshare.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns7:idAnnounce" type="xsd:int"/>
   </ns1:operation>
-  <ns1:operation name="isAvailable" qname="ns6:isAvailable" returnQName="ns6:isAvailableReturn" returnType="xsd:boolean" soapAction="" xmlns:ns6="http://ifshare.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns6:idAnnounce" type="xsd:int"/>
-  </ns1:operation>
-  <ns1:parameter name="allowedMethods" value="isAvailable buyBasket getMinPrice getProductPrice addProductToBasket removeProductFromBasket"/>
+  <ns1:parameter name="allowedMethods" value="isAvailable getBasket buyBasket getMinPrice getProductPrice addProductToBasket removeProductFromBasket"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
-  <ns1:parameter name="wsdlPortType" value="IfService"></ns1:parameter>
-  <ns1:parameter name="className" value="fr.ifshare.IfService"></ns1:parameter>
+  <ns1:parameter name="wsdlPortType" value="IfService"/>
+  <ns1:parameter name="className" value="fr.ifshare.IfService"/>
   <ns1:parameter name="wsdlServicePort" value="IfService"/>
   <ns1:parameter name="schemaQualified" value="http://ifshare.fr"/>
-  <ns1:parameter name="wsdlTargetNamespace" value="http://ifshare.fr"></ns1:parameter>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://ifshare.fr"/>
   <ns1:parameter name="wsdlServiceElement" value="IfServiceService"/><ns1:parameter
   	name="scope" value="application">
 </ns1:parameter>
