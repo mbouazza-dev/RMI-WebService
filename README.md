@@ -44,6 +44,15 @@ Eiffel Corp use Thymeleaf and Spring to give a Web User Interface in order to se
 
 The employee datas like email, firstname or login are stored in H2 database.
 
+### IfShare-App
+
+IfShare-App is a Java Application, it work with Eiffel-Corp in a Java RMI architecture to share Java Objects and features between them.
+
+IfShare-App is responsible to store the products, the announces and the store in a H2 database. 
+It share Data with some SOAP services and use them, for example to convert currencies, contact bank details and more.
+
+IfShare-App stores its store Object in the RMI registry, so, Eiffel Corp and If-Service can use it.
+
 ## Goals
 Build multiple web application based on java RMI allowing the sale of products between individuals and company members
 
