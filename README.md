@@ -4,6 +4,26 @@
 RMI-WEBSERVICES is a Java application for employees to buy and resell products. Employees can make purchases in multiple currencies, use a banking service, and use a foreign service to open the app to other users.
 </p>
 
+## Apps
+
+[eiffel-corp](https://github.com/mbouazza-dev/RMI-WebService/tree/main/eiffel-corp)
+
+[ifshare-app](https://github.com/mbouazza-dev/RMI-WebService/tree/main/ifshare-app)
+
+[bank-service](https://github.com/mbouazza-dev/RMI-WebService/tree/main/bank-service)
+
+[if-service](https://github.com/mbouazza-dev/RMI-WebService/tree/main/if-service)
+
+## Development
+
+### Prerequisites
+
+To run RMI-WebService you'll need the following tools installed
+
+- [`Java JDK8`](https://www.oracle.com/fr/java/technologies/javase/javase8-archive-downloads.html)
+- [`Maven`](https://maven.apache.org/)
+
+
 ## Goals
 Build multiple web application based on java RMI allowing the sale of products between individuals and company members
 
