@@ -64,10 +64,15 @@ When an Announce does not have available product and a client want to be alert w
 
 ### Bank-Service
 
+WIP
+
 ### If-Service
+
+WIP
 
 ### Converter
 
+WIP
 
 ## How to use
 ### Build
