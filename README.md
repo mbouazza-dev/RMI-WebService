@@ -1,7 +1,7 @@
 <h1 align="center"> RMI-WebService</h1>
 
 <p align="center">
-RMI-WEBSERVICES is a Application made up of several Java micro services, for employees to buy and resell products. This project is based on SOAP and RMI architecture. 
+RMI-WEBSERVICES is a Application made up of several Java micro services for employees, to buy and resell products. This project is based on SOAP and RMI architecture. 
 Employees can make purchases in multiple currencies, use a banking service, and use a foreign service to open the app to other users.
 </p>
 
@@ -53,6 +53,22 @@ IfShare-App is responsible to store the products, the announces and the store in
 It share Data with some SOAP services and use them, for example to convert currencies, contact bank details and more.
 
 IfShare-App stores its store Object in the RMI registry, so, Eiffel Corp and If-Service can use it.
+The store it's accessible with the name storeService.
+
+```Java
+Naming.rebind("storeService", store);
+``` 
+
+Also, IfShare-App implement an Observer who use an EmailService. 
+When an Announce does not have available product and a client want to be alert when the announce have a product again, Eiffel Corp use RMI shared methods to register the client in a Queue. IfShare send an email when the announce have a new product.
+
+### Bank-Service
+
+### If-Service
+
+### Converter
+
+
 
 ## Build
 
