@@ -69,14 +69,14 @@ When an Announce does not have available product and a client want to be alert w
 ### Converter
 
 
-
-## Build
+## How to use
+### Build
 
 ```shell
 mvn package # in root directory
 ```
 
-## Import this project in Eclipse
+### Import this project in Eclipse
 
 1. File > Import...
 2. Maven > Existing Maven Projects
