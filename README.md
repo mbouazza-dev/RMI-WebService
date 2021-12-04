@@ -15,10 +15,6 @@ To run RMI-WebService you'll need the following tools installed
 - [`Java JDK8`](https://www.oracle.com/fr/java/technologies/javase/javase8-archive-downloads.html)
 - [`Maven`](https://maven.apache.org/)
 
-### Installation
-
-WIP...
-
 
 ## Architecture
 
@@ -74,7 +70,8 @@ WIP
 
 WIP
 
-## How to use
+## Installation
+
 ### Build
 
 ```shell
