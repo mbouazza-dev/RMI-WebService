@@ -60,11 +60,15 @@ When an Announce does not have available product and a client want to be alert w
 
 ### Bank-Service
 
-WIP
+Bank Service is a SOAP Web Service.   
 
 ### If-Service
 
-WIP
+If-Service is a SOAP Web Service write in Java. 
+It communicates with If-Share and Bank-Service to allow several functionalities like the purchase, the sale
+or check the availability of the products.
+
+If-Service retrieve the IfShare's Store with RMI to distribute the store and its products outside. 
 
 ### Converter
 
