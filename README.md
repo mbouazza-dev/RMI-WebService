@@ -60,19 +60,37 @@ When an Announce does not have available product and a client want to be alert w
 
 ### Bank-Service
 
-Bank Service is a SOAP Web Service.   
+Bank Service is a SOAP Web Service. It communicates with If-Service thanks to If-Share to check if a purchase is possible.
+
+Below are the services offered:
+
+- ```deposit```
+- ```amount```
+- ```addProductToBasket```
+- ```withdraw```
 
 ### If-Service
 
 If-Service is a SOAP Web Service write in Java. 
 It communicates with If-Share and Bank-Service to allow several functionalities like the purchase, the sale
-or check the availability of the products.
+or check the availability of products.
 
 If-Service retrieve the IfShare's Store with RMI to distribute the store and its products outside. 
 
+Below are the services offered:
+
+- ```getMinPrice```
+- ```getProductPrice```
+- ```addProductToBasket```
+- ```removeProductToBasket```
+- ```buyBasket```
+- ```getBasket```
+-  ```isAvailable```
+
+
 ### Converter
 
-WIP
+Bank Service is a SOAP Web Service. It communicates with  If-Share to convert all currencies in the applicaton.
 
 ## Installation
 
