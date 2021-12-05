@@ -92,7 +92,7 @@ Below are the services offered:
 
 Bank Service is a SOAP Web Service. It communicates with  If-Share to convert all currencies in the applicaton.
 
-This is an extern services. It descriptions is available [here](https://currencysystem.com/kb/17-110)) 
+This is an extern services. It descriptions is available [here](https://currencysystem.com/kb/17-110)
 
 ## Installation
 
