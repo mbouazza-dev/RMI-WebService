@@ -32,6 +32,8 @@ RMI-WebService is organized through differents J2E applications, RMI architectur
 
 - [converter](http://webservices.currencysystem.com/currencyserver/)
 
+
+
 ### Eiffel-Corp 
 
 Eiffel Corp is a Java application allowing employees to access company services including IfShare App.
@@ -45,8 +47,8 @@ The employee datas like email, firstname or login are stored in H2 database.
 
 IfShare-App is a Java Application, it work with Eiffel-Corp in a Java RMI architecture to share Java Objects and features between them.
 
-IfShare-App is responsible to store the products, the announces and the store in a H2 database. 
-It share Data with some SOAP services and use them, for example to convert currencies, contact bank details and more.
+IfShare-App is responsible to store the products, the announces and the store in a HashMap. 
+It shares Data with some SOAP services and use them, for example to convert currencies, contact bank details and more.
 
 IfShare-App stores its store Object in the RMI registry, so, Eiffel Corp and If-Service can use it.
 The store it's accessible with the name storeService.
