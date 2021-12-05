@@ -16,7 +16,7 @@ To run RMI-WebService you'll need the following tools installed
 - [`Maven`](https://maven.apache.org/)
 
 
-## Architecture
+## Architecture and Design Choices
 
 <img src="./global_project_architecture.jpeg" alt="Development architecture" width="620px" />
 
@@ -43,6 +43,11 @@ Eiffel Corp use Thymeleaf and Spring to give a Web User Interface in order to se
 
 The employee datas like email, firstname or login are stored in H2 database.
 
+We use Spring because it's a solid framework for providing a secure web application. The use of employee sessions are thus properly managed. 
+
+Also we have a H2 database, it's a good Database write in Java. Its implementation is therefore simpler, particularly in an RMI application.
+
+
 ### IfShare-App
 
 IfShare-App is a Java Application, it work with Eiffel-Corp in a Java RMI architecture to share Java Objects and features between them.
@@ -58,7 +63,8 @@ Naming.rebind("storeService", store);
 ```
 
 Also, IfShare-App implement an Observer who use an EmailService. 
-When an Announce does not have available product and a client want to be alert when the announce have a product again, Eiffel Corp use RMI shared methods to register the client in a Queue. IfShare send an email when the announce have a new product.
+When an Announce does not have available product and a client want to be alert when the announce have a product again, Eiffel Corp use RMI shared methods to register the client in a Queue. IfShare send an email when the announce have a new product. 
+A message on standard output indicating the contents of the notification is also sent.
 
 ### Bank-Service
 
