@@ -18,7 +18,7 @@ To run RMI-WebService you'll need the following tools installed
 
 ## Architecture
 
-<img src="./docs/global_project_architecture.jpeg" alt="Development architecture" width="620px" />
+<img src="./global_project_architecture.jpeg" alt="Development architecture" width="620px" />
 
 RMI-WebService is organized through differents J2E applications, RMI architecture and SOAP services:
 
