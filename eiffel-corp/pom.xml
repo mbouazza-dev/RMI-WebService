@@ -19,6 +19,14 @@
 		<jar.mainClass>fr.uge.main.Main</jar.mainClass>
 	</properties>
 
+	<repositories>
+	    <repository>
+	        <id>geomajas</id>
+	        <url>http://maven.geomajas.org/nexus/content/groups/public/javax/wsdl/com.springsource.javax.wsdl/1.6.1/</url>
+	    </repository>
+	</repositories>
+	
+
 	<dependencies>
 		<!-- Utile pour l'interface graphique -->
 		<dependency>
@@ -53,6 +61,16 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+    		<groupId>org.apache.axis</groupId>
+    		<artifactId>axis</artifactId>
+    		<version>1.4</version>
+		</dependency>
+		<dependency>
+    		<groupId>commons-discovery</groupId>
+    		<artifactId>commons-discovery</artifactId>
+    		<version>0.2</version>
 		</dependency>
 	</dependencies>
 	
