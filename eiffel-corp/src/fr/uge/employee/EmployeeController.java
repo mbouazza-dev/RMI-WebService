@@ -202,6 +202,7 @@ public class EmployeeController {
 		if (!sessions.containsKey(session.getId())) {
 			return "redirect:/login"; // si non connecté on redirige vers la page de connexion
 		}
+		product.setIdEmployee(sessions.get(session.getId()));
 		store.addProductToAnnounce(idAnnounce, product);
 		model.addAttribute("announce", store.getAnnounce(idAnnounce));
 		return "announce";
